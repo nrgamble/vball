@@ -1,0 +1,7 @@
+<ul id="pools">
+<% @pools.each do |pool| %>
+  <li><%= link_to pool.name, edit_pool_url(pool) %></li>
+<% end %>
+</ul>
+
+<%= link_to 'New Pool', new_pool_url %>
