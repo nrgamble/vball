@@ -1,4 +1,5 @@
 <%= form_for @pool do |f| %>
+  <p><%= f.label :tournament_id %>: <%= f.select :tournament_id, Tournament.all.collect {|t| [ t.name, t.id ] } %></p>
   <p><%= f.label :name %>: <%= f.text_field :name %></p>
   <p><%= f.submit :Save %></p>
-<%end%>
+<% end %>

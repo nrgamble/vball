@@ -1,7 +1,7 @@
 <ul id="tournaments">
-<% @tournaments.each do |tournament| %>
-  <li><%= link_to tournament.name, edit_tournament_url(tournament) %></li>
-<% end %>
+  <% @tournaments.each do |tournament| %>
+    <li><%= link_to tournament.name, tournament %></li>
+  <% end %>
 </ul>
 
 <%= link_to 'New Tournament', new_tournament_url %>

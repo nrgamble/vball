@@ -25,5 +25,22 @@ class PoolsController < ApplicationController
       render :action => :new
     end
   end
+  
+  def update
+    @pool = Pool.find(params[:id])
+
+    if @pool.update_attributes(params[:pool])
+      redirect_to pools_url    
+    else
+      redirect_to edit_pool_url(@pool)
+    end
+  end
+  
+  def destroy
+    @pool = Pool.find(params[:id])
+    @pool.destroy
+   
+    redirect_to pools_url
+  end
 
 end

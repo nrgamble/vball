@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vball</title>
+  <title>Vball Tourney</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<a href="/" id="logo">Vball Tourney</a>
+
 <%= yield %>
+
+<br><br><br>
+<p>
+  <%= link_to 'Tournaments', tournaments_url %>
+  <%= link_to 'Pools', pools_url %>
+  <%= link_to 'Teams', teams_url %>
+  <%= link_to 'Games', games_url %>
+</p>
 
 </body>
 </html>

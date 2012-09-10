@@ -1,0 +1,18 @@
+$font: Verdana, Geneva, sans-serif; /* TODO: figure out how to import variables.scss to use everywhere else */
+
+body {
+  font-family: $font;
+  padding: 10px;
+  line-height: 2em;
+}
+
+h1 { font-size: 1.3em; }
+
+#logo {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+  display: block;
+  margin: 0 0 10px 0;
+}

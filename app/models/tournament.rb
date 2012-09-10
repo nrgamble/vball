@@ -1,8 +1,11 @@
 class Tournament
   include MongoMapper::Document
 
-  key :name, String, :required => true
-  key :date, Time, :required => true
+  key :name, String
+  key :date, Time
 
   timestamps!
+  
+  has_many :teams
+  has_many :pools
 end

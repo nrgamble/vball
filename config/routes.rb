@@ -1,4 +1,12 @@
 Vball::Application.routes.draw do
+  
+  resources :tournaments
+  resources :pools
+  resources :teams
+  resources :games
+  
+  root :to => "tournaments#index"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

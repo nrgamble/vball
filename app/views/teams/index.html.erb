@@ -1,7 +1,7 @@
 <ul id="teams">
-<% @teams.each do |team| %>
-  <li><%= link_to team.name, edit_team_url(team) %></li>
-<% end %>
+  <% @teams.each do |team| %>
+    <li><%= link_to team.name, team %></li>
+  <% end %>
 </ul>
 
 <%= link_to 'New Team', new_team_url %>
