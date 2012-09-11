@@ -1,10 +1,12 @@
 <%= form_for @game do |f| %>
-  <p><%= f.label :tournament_id %>: <%= f.select :tournament_id, Tournament.all.collect {|t| [ t.name, t.id ] } %></p>
-  <p><%= f.label :pool_id %>: <%= f.select :pool_id, Pool.all.collect {|p| [ p.name, p.id ] } %></p>
+  <p><%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
+  <p><%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %></p>
   <p>
-    <%= f.label :away_id %>: <%= f.select :away_id, Team.all.collect {|t| [ t.name, t.id ] } %> <%= f.text_field :score_away %>
+    <%= f.collection_select(:away_id, Team.all, :id, :name, { :prompt => '- Select Away -', :selected => params[:away_id] }) %>
+    <%= f.text_field :score_away %>
     vs
-    <%= f.label :home_id %>: <%= f.select :home_id, Team.all.collect {|t| [ t.name, t.id ] } %> <%= f.text_field :score_home %>
+    <%= f.collection_select(:home_id, Team.all, :id, :name, { :prompt => '- Select Home -', :selected => params[:home_id] }) %>
+    <%= f.text_field :score_home %>
   </p>   
   <p><%= f.submit :Save %></p>
 <% end %>

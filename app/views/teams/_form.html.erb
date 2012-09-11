@@ -1,6 +1,6 @@
 <%= form_for @team do |f| %>
-  <p><%= f.label :tournament_id %>: <%= f.select :tournament_id, Tournament.all.collect {|t| [ t.name, t.id ] } %></p>
-  <p><%= f.label :pool_id %>: <%= f.select :pool_id, Pool.all.collect {|p| [ p.name, p.id ] } %></p>
+  <p><%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
+  <p><%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %></p>
   <p><%= f.label :name %>: <%= f.text_field :name %></p>
   <p><%= f.submit :Save %></p>
 <% end %>

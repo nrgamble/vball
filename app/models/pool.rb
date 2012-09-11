@@ -8,5 +8,5 @@ class Pool
   
   belongs_to :tournament
   
-  has_many :teams
+  many :teams
 end

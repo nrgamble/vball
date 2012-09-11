@@ -1,0 +1,17 @@
+<h1><%= @team.name %></h1>
+<h2><%= link_to @team.tournament.name, @team.tournament %></h2>
+<h3><%= link_to @team.pool.name, @team.pool %></h3>
+<p>Record: <%= @team.wins.length %> - <%= @team.losses.length %></p>
+
+<h3>Games</h3>
+<ul>
+  <% @team.games.each do |game| %>
+    <li>
+      <%= link_to game.winner.name, game.winner %> (<%= game.score_winner %>)
+      def.
+      <%= link_to game.loser.name, game.loser %> (<%= game.score_loser %>)
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit Team', edit_team_url(@team) %>

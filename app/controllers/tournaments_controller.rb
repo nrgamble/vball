@@ -20,7 +20,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(params[:tournament])
 
     if @tournament.save
-      redirect_to tournaments_url
+      redirect_to @tournament
     else
       render :action => :new
     end

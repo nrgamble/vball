@@ -1,15 +1,23 @@
 <h1><%= @pool.name %></h1>
-<h2><%= @pool.tournament.name %></h2>
+<h2><%= link_to @pool.tournament.name, @pool.tournament %></h2>
 
 <h3>Teams</h3>
 <table><tbody>
+  <tr>
+    <th>Name</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Differential</th>
+  </tr>
   <% @pool.teams.each do |team| %>
     <tr>
       <td><%= link_to team.name, team %></td>
-      <td><%= team.games %></td>
-      <td><%= team.games %></td>
+      <td><%= team.wins.length %></td>
+      <td><%= team.losses.length %></td>
+      <td><%= team.differential %></td>
     </tr>
   <% end %>
 </tbody></table>
+<%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %>
 
 <%= link_to 'Edit Pool', edit_pool_url(@pool) %>

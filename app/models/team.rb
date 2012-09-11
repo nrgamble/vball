@@ -11,27 +11,39 @@ class Team
   belongs_to :pool
   
   def games
-    return Game.where(['away_id = ? OR home_id = ?', self.id, self.id])
+    return Game.where(:$or => [ { :away_id => self.id }, { :home_id => self.id } ]).all
   end
   
   def wins
-    wins = 0
+    wins = Array.new
     self.games.each do |g|
       if (g.home_id == self.id and g.score_home > g.score_away) or (g.away_id == self.id and g.score_away > g.score_home)
-        wins += 1
+        wins << g
       end
     end
     return wins
   end
   
   def losses
-    losses = 0
+    losses = Array.new
     self.games.each do |g|
-      if (g.home_id.eq?(self.id) and g.score_home < g.score_away) or (g.away_id.eq?(self.id) and g.score_away < g.score_home)
-        losses += 1
+      if (g.home_id == self.id and g.score_home < g.score_away) or (g.away_id == self.id and g.score_away < g.score_home)
+        losses << g
       end
     end
     return losses
+  end
+  
+  def differential
+    differential = 0
+    self.games.each do |g|
+      if g.winner?(self)
+        differential += (g.score_winner - g.score_loser)
+      else
+        differential -= (g.score_winner - g.score_loser)
+      end
+    end
+    return differential
   end
   
 end

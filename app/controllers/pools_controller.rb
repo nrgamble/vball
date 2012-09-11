@@ -20,7 +20,7 @@ class PoolsController < ApplicationController
     @pool = Pool.new(params[:pool])
 
     if @pool.save
-      redirect_to pools_url
+      redirect_to @pool
     else
       render :action => :new
     end
@@ -30,7 +30,7 @@ class PoolsController < ApplicationController
     @pool = Pool.find(params[:id])
 
     if @pool.update_attributes(params[:pool])
-      redirect_to pools_url    
+      redirect_to @pool
     else
       redirect_to edit_pool_url(@pool)
     end

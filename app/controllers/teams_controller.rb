@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
     @team = Team.new(params[:team])
 
     if @team.save
-      redirect_to teams_url
+      redirect_to @team
     else
       render :action => :new
     end

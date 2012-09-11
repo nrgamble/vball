@@ -6,6 +6,6 @@ class Tournament
 
   timestamps!
   
-  has_many :teams
-  has_many :pools
+  many :teams
+  many :pools
 end
