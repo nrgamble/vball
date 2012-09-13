@@ -14,4 +14,13 @@
   <% end %>
 </ul>
 
+<h3>Head 2 Head</h3>
+<ul>
+  <% @team.pool.teams.each do |team| %>
+    <% if @team != team %>
+      <li><%= team.name %>: <%= @team.head2head(team)[0] %> - <%= @team.head2head(team)[1] %></li>
+    <% end %>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit Team', edit_team_url(@team) %>

@@ -7,17 +7,20 @@
     <th>Name</th>
     <th>Wins</th>
     <th>Losses</th>
+    <th>Percentage</th>
     <th>Differential</th>
   </tr>
-  <% @pool.teams.each do |team| %>
+  <% @pool.standings.each do |team| %>
     <tr>
       <td><%= link_to team.name, team %></td>
       <td><%= team.wins.length %></td>
       <td><%= team.losses.length %></td>
+      <td><%= team.win_percentage %></td>
       <td><%= team.differential %></td>
     </tr>
   <% end %>
 </tbody></table>
-<%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %>
 
-<%= link_to 'Edit Pool', edit_pool_url(@pool) %>
+<%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %><br />
+<%= link_to 'New Game', new_game_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %><br />
+<%= link_to 'Edit Pool', edit_pool_url(@pool) %><br />

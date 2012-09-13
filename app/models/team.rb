@@ -34,6 +34,10 @@ class Team
     return losses
   end
   
+  def win_percentage
+    return self.games.length == 0 ? 0 : self.wins.length.to_f / self.games.length.to_f
+  end
+  
   def differential
     differential = 0
     self.games.each do |g|
@@ -44,6 +48,16 @@ class Team
       end
     end
     return differential
+  end
+  
+  def head2head(team)
+    head2head = [0, 0]
+    self.games.each do |g|
+      if g.home_id == team.id or g.away_id == team.id
+        g.winner?(self) ? head2head[0] += 1 : head2head[1] += 1
+      end
+    end
+    return head2head
   end
   
 end
