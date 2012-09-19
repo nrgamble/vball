@@ -1,26 +1,12 @@
 <h1><%= @pool.name %></h1>
-<h2><%= link_to @pool.tournament.name, @pool.tournament %></h2>
+<%= link_to 'Edit Pool', edit_pool_url(@pool) %><br />
+<h2>Tournament: <%= link_to @pool.tournament.name, @pool.tournament %></h2>
 
-<h3>Teams</h3>
-<table><tbody>
-  <tr>
-    <th>Name</th>
-    <th>Wins</th>
-    <th>Losses</th>
-    <th>Percentage</th>
-    <th>Differential</th>
-  </tr>
-  <% @pool.standings.each do |team| %>
-    <tr>
-      <td><%= link_to team.name, team %></td>
-      <td><%= team.wins.length %></td>
-      <td><%= team.losses.length %></td>
-      <td><%= team.win_percentage %></td>
-      <td><%= team.differential %></td>
-    </tr>
-  <% end %>
-</tbody></table>
+<h3>Standings</h3>
+<%= render :partial => 'teams/standings', :locals => { :teams => @pool.standings } %>
 
 <%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %><br />
-<%= link_to 'New Game', new_game_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %><br />
-<%= link_to 'Edit Pool', edit_pool_url(@pool) %><br />
+
+<% if @pool.teams.length >= 2 %>
+  <%= link_to 'New Game', new_game_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %><br />
+<% end %>

@@ -1,6 +1,28 @@
 <%= form_for @team do |f| %>
-  <p><%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
-  <p><%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %></p>
+  <p>
+    <%= f.label :tournament_id %>:
+    <% if @team.new? %>
+      <% if params[:tournament_id] %>
+        <%= Tournament.find(params[:tournament_id]).name %> <%= f.hidden_field :tournament_id, { :value => params[:tournament_id] } %>
+      <% else %>
+        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
+      <% end %>
+    <% else %>
+      <%= @team.tournament.name %> <%= f.hidden_field :tournament_id %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :pool_id %>:
+    <% if @team.new? %>
+      <% if params[:pool_id] %>
+        <%= Pool.find(params[:pool_id]).name %> <%= f.hidden_field :pool_id, { :value => params[:pool_id] } %>
+      <% else %>
+        <%= f.label :pool_id %>: <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %>
+      <% end %>
+    <% else %>
+      <%= @team.pool.name %> <%= f.hidden_field :pool_id %>
+    <% end %>
+  </p>
   <p><%= f.label :name %>: <%= f.text_field :name %></p>
   <p><%= f.submit :Save %></p>
 <% end %>

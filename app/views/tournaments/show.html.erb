@@ -4,16 +4,10 @@
 <h3>Pools</h3>
 <ul>
   <% @tournament.pools.each do |pool| %>
-    <li>
-      <%= link_to pool.name, pool %> (<%= pool.teams.count %>)
-      <ul style="display:none">
-        <% pool.teams.each do |team| %>
-          <li><%= link_to team.name, team %></li>
-        <% end %>
-      </ul>
-    </li>
+    <li><%= link_to pool.name, pool %></li>
   <% end %>
 </ul>
-
 <%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %><br />
-<%= link_to 'New Game', new_game_url(:tournament_id => @tournament.id) %><br />
+
+<h3>Standings</h3>
+<%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>

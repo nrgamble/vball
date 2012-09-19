@@ -25,5 +25,22 @@ class TournamentsController < ApplicationController
       render :action => :new
     end
   end
+  
+  def update
+    @tournament = Tournament.find(params[:id])
+
+    if @tournament.update_attributes(params[:tournament])
+      redirect_to @tournament
+    else
+      redirect_to edit_tournament_url(@tournament)
+    end
+  end
+  
+  def destroy
+    @tournament = Tournament.find(params[:id])
+    @tournament.destroy
+   
+    redirect_to tournaments_url
+  end
 
 end

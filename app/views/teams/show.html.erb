@@ -1,6 +1,6 @@
 <h1><%= @team.name %></h1>
-<h2><%= link_to @team.tournament.name, @team.tournament %></h2>
-<h3><%= link_to @team.pool.name, @team.pool %></h3>
+<h2>Tournament: <%= link_to @team.tournament.name, @team.tournament %></h2>
+<h3>Pool: <%= link_to @team.pool.name, @team.pool %></h3>
 <p>Record: <%= @team.wins.length %> - <%= @team.losses.length %></p>
 
 <h3>Games</h3>

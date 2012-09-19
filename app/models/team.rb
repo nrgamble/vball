@@ -60,4 +60,18 @@ class Team
     return head2head
   end
   
+  def self.sort_standings(x, y)
+    if x.win_percentage == y.win_percentage
+      if x.head2head(y)[0] > x.head2head(y)[1]
+        return 1
+      elsif x.head2head(y)[0] < x.head2head(y)[1]
+        return -1
+      else
+        return x.differential <=> y.differential
+      end
+    else
+      return x.win_percentage <=> y.win_percentage
+    end
+  end
+  
 end
