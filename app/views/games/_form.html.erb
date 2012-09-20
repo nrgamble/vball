@@ -3,32 +3,40 @@
     <%= f.label :tournament_id %>:
     <% if @game.new? %>
       <% if params[:tournament_id] %>
-        <%= Tournament.find(params[:tournament_id]).name %> <%= f.hidden_field :tournament_id, { :value => params[:tournament_id] } %>
+        <%= link_to @tournament.name, @tournament %> <%= f.hidden_field :tournament_id, { :value => @tournament.id } %>
       <% else %>
         <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %>
       <% end %>
     <% else %>
-      <%= @game.tournament.name %> <%= f.hidden_field :tournament_id %>
+      <%= link_to @game.tournament.name, @game.tournament %> <%= f.hidden_field :tournament_id %>
     <% end %>
   </p>
   <p>
     <%= f.label :pool_id %>:
     <% if @game.new? %>
       <% if params[:pool_id] %>
-        <%= Pool.find(params[:pool_id]).name %> <%= f.hidden_field :pool_id, { :value => params[:pool_id] } %>
+        <%= link_to @pool.name, @pool %> <%= f.hidden_field :pool_id, { :value => @pool.id } %>
       <% else %>
         <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %>
       <% end %>
     <% else %>
-      <%= @game.pool.name %> <%= f.hidden_field :pool_id %>
+      <%= link_to @game.pool.name, @game.pool %> <%= f.hidden_field :pool_id %>
     <% end %>
   </p>
   <p>
-    <%= f.collection_select(:away_id, Team.all, :id, :name, { :prompt => '- Select Away -', :selected => params[:away_id] }) %>
-    <%= f.text_field :score_away %>
-    vs
-    <%= f.collection_select(:home_id, Team.all, :id, :name, { :prompt => '- Select Home -', :selected => params[:home_id] }) %>
-    <%= f.text_field :score_home %>
+    <% if @game.new? %>
+      <%= f.collection_select(:away_id, @teams, :id, :name, { :prompt => '- Select Away Team -', :selected => params[:away_id] }) %>
+    <% else %>
+      <%= link_to @game.away.name, @game.away %> <%= f.hidden_field :away_id %>
+    <% end %>
+    <%= f.text_field :score_away, { :size => 4 } %>
+    <br />vs<br />
+    <% if @game.new? %>
+      <%= f.collection_select(:home_id, @teams, :id, :name, { :prompt => '- Select Home Team -', :selected => params[:home_id] }) %>
+    <% else %>
+      <%= link_to @game.home.name, @game.home %> <%= f.hidden_field :home_id %>
+    <% end %>
+    <%= f.text_field :score_home, { :size => 4 } %>
   </p>   
   <p><%= f.submit :Save %></p>
 <% end %>

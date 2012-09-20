@@ -3,17 +3,17 @@ class PoolsController < ApplicationController
   def index
     @pools = Pool.all
   end
-    
-  def new
-    @pool = Pool.new
-  end
-  
-  def edit
-    @pool = Pool.find(params[:id])
-  end
 
   def show
     @pool = Pool.find(params[:id])
+  end
+  
+  def new
+    @pool = Pool.new
+    
+    if params[:tournament_id]
+      @tournament = Tournament.find(params[:tournament_id])
+    end
   end
 
   def create
@@ -24,6 +24,10 @@ class PoolsController < ApplicationController
     else
       render :action => :new
     end
+  end
+  
+  def edit
+    @pool = Pool.find(params[:id])
   end
   
   def update
@@ -40,7 +44,7 @@ class PoolsController < ApplicationController
     @pool = Pool.find(params[:id])
     @pool.destroy
    
-    redirect_to pools_url
+    redirect_to @pool.tournament
   end
 
 end

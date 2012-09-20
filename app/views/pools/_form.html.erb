@@ -3,12 +3,12 @@
     <%= f.label :tournament_id %>:
     <% if @pool.new? %>
       <% if params[:tournament_id] %>
-        <%= Tournament.find(params[:tournament_id]).name %> <%= f.hidden_field :tournament_id, { :value => params[:tournament_id] } %>
+        <%= link_to @tournament.name, @tournament %> <%= f.hidden_field :tournament_id, { :value => @tournament.id } %>
       <% else %>
         <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
       <% end %>
     <% else %>
-      <%= @pool.tournament.name %> <%= f.hidden_field :tournament_id %>
+      <%= link_to @pool.tournament.name, @pool.tournament %> <%= f.hidden_field :tournament_id %>
     <% end %>
   </p>
   <p><%= f.label :name %>: <%= f.text_field :name %></p>

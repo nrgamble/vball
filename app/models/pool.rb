@@ -9,6 +9,7 @@ class Pool
   belongs_to :tournament
   
   many :teams
+  many :games
   
   def standings
     return self.teams.sort! { |x,y| Team.sort_standings(y, x) }

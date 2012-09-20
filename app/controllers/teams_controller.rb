@@ -3,17 +3,24 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.all
   end
-    
-  def new
-    @team = Team.new
-  end
-  
-  def edit
-    @team = Team.find(params[:id])
-  end
 
   def show
     @team = Team.find(params[:id])
+  end
+  
+  def new
+    @team = Team.new
+    
+    if params[:tournament_id]
+      @tournament = Tournament.find(params[:tournament_id])
+    end
+        
+    if params[:pool_id]
+      @pool  = Pool.find(params[:pool_id])
+      @teams = @pool.teams
+    else
+      @teams = Team.all
+    end
   end
 
   def create
@@ -24,6 +31,27 @@ class TeamsController < ApplicationController
     else
       render :action => :new
     end
+  end
+  
+  def edit
+    @team = Team.find(params[:id])
+  end
+  
+  def update
+    @team = Team.find(params[:id])
+
+    if @team.update_attributes(params[:team])
+      redirect_to @team
+    else
+      redirect_to edit_team_url(@team)
+    end
+  end
+  
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+   
+    redirect_to @team.pool
   end
 
 end

@@ -1,4 +1,5 @@
 <h1><%= @team.name %></h1>
+<%= link_to 'Edit Team', edit_team_url(@team) %>
 <h2>Tournament: <%= link_to @team.tournament.name, @team.tournament %></h2>
 <h3>Pool: <%= link_to @team.pool.name, @team.pool %></h3>
 <p>Record: <%= @team.wins.length %> - <%= @team.losses.length %></p>
@@ -22,5 +23,3 @@
     <% end %>
   <% end %>
 </ul>
-
-<%= link_to 'Edit Team', edit_team_url(@team) %>
