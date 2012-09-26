@@ -1,3 +1,5 @@
 <h1>Edit Pool</h1>
 
 <%= render :partial => 'form' %>
+
+<%= link_to 'Delete', @pool, :confirm => 'Are you sure?', :method => :delete %>

@@ -12,3 +12,5 @@
 
 <h3>Standings</h3>
 <%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
+
+<%= link_to 'Print Your Bracket', @tournament.bracket_url %>

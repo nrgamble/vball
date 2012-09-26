@@ -16,27 +16,27 @@ class Game
   belongs_to :away, :class_name => 'Team'
   
   def winner
-    return score_home > score_away ? self.home : self.away
+    score_home > score_away ? self.home : self.away
   end
   
   def winner?(team)
-    return team == self.winner
+    team == self.winner
   end
   
   def loser
-    return score_home > score_away ? self.away : self.home
+    score_home > score_away ? self.away : self.home
   end
   
   def loser?(team)
-    return team == self.loser
+    team == self.loser
   end
   
   def score_winner
-    return score_home > score_away ? score_home : score_away
+    score_home > score_away ? score_home : score_away
   end
   
   def score_loser
-    return score_home > score_away ? score_away : score_home
+    score_home > score_away ? score_away : score_home
   end
   
 end

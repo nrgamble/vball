@@ -8,11 +8,11 @@ class Pool
   
   belongs_to :tournament
   
-  many :teams
+  many :teams, :dependent => :destroy
   many :games
   
   def standings
-    return self.teams.sort! { |x,y| Team.sort_standings(y, x) }
+    self.teams.sort! { |x,y| Team.sort_standings(y, x) }
   end
   
 end

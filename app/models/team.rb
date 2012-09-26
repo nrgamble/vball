@@ -10,8 +10,15 @@ class Team
   belongs_to :tournament
   belongs_to :pool
   
+  def destroy
+    self.games.each do |g|
+      g.destroy
+    end
+    super
+  end
+  
   def games
-    return Game.where(:$or => [ { :away_id => self.id }, { :home_id => self.id } ]).all
+    Game.where(:$or => [ { :away_id => self.id }, { :home_id => self.id } ]).all
   end
   
   def wins
@@ -35,7 +42,7 @@ class Team
   end
   
   def win_percentage
-    return self.games.length == 0 ? 0 : self.wins.length.to_f / self.games.length.to_f
+    self.games.size == 0 ? 0 : self.wins.size.to_f / self.games.size.to_f
   end
   
   def differential

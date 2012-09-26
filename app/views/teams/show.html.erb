@@ -8,9 +8,11 @@
 <ul>
   <% @team.games.each do |game| %>
     <li>
-      <%= link_to game.winner.name, game.winner %> (<%= game.score_winner %>)
-      def.
-      <%= link_to game.loser.name, game.loser %> (<%= game.score_loser %>)
+      <% if game.winner?(@team) %>
+        W vs. <%= link_to game.loser.name, game.loser %> (<%= game.score_winner %> - <%= game.score_loser %>)
+      <% else %>
+        L vs. <%= link_to game.winner.name, game.winner %> (<%= game.score_loser %> - <%= game.score_winner %>)
+      <% end %>
     </li>
   <% end %>
 </ul>

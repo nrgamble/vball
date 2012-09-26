@@ -1,11 +1,13 @@
 <%= form_for @tournament do |f| %>
   <p><%= f.label :name %>: <%= f.text_field :name %></p>
-  <p><%= f.label :date %>: <%= f.text_field :date %></p>    
+  <p><%= f.label :date %>: <%= f.text_field :date, :value => l(@tournament.date, :format => :nice) %></p>    
   <p><%= f.submit :Save %></p>
 <% end %>
 
 <script>
   $(function() {
-    $('#tournament_date').datepicker();
+    $('#tournament_date').datepicker({
+      dateFormat : 'DD, MM d, yy'
+    });
   });
 </script>
