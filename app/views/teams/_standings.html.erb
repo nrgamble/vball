@@ -1,21 +1,21 @@
-<table><tbody>
+<table id="standings"><tbody>
   <tr>
     <th></th>
     <th>Team</th>
-    <th>W</th>
-    <th>L</th>
-    <th>%</th>
-    <th>Diff</th>
+    <th class="num">W</th>
+    <th class="num">L</th>
+    <th class="num">%</th>
+    <th class="num">+/-</th>
   </tr>
   <% i = 0 %>
   <% teams.each do |team| %>
     <tr>
-      <td><%= i += 1 %></td>
+      <td class="num"><%= i += 1 %></td>
       <td><%= link_to team.name, team %></td>
-      <td><%= team.wins.length %></td>
-      <td><%= team.losses.length %></td>
-      <td><%= format_win_percentage(team.win_percentage) %></td>
-      <td><%= team.differential %></td>
+      <td class="num"><%= team.wins.length %></td>
+      <td class="num"><%= team.losses.length %></td>
+      <td class="num"><%= format_win_percentage(team.win_percentage) %></td>
+      <td class="num"><%= team.differential %></td>
     </tr>
   <% end %>
 </tbody></table>

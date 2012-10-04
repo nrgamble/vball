@@ -6,10 +6,12 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @h1   = "#{@game.away.name} @ #{@game.home.name}" 
   end
   
   def new
     @game = Game.new
+    @h1 = 'New Game'
     
     if params[:tournament_id]
       @tournament = Tournament.find(params[:tournament_id])
@@ -22,6 +24,12 @@ class GamesController < ApplicationController
       @teams = Team.all
     end
   end
+  
+  def edit
+    @game  = Game.find(params[:id])
+    @teams = @game.pool.teams
+    @h1 = 'Edit Game'
+  end
 
   def create
     @game = Game.new(params[:game])
@@ -31,10 +39,6 @@ class GamesController < ApplicationController
     else
       render :action => :new
     end
-  end
-  
-  def edit
-    @game = Game.find(params[:id])
   end
   
   def update

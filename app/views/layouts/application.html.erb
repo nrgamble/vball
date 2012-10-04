@@ -4,14 +4,31 @@
   <title>Tourney Time</title>
   <%= csrf_meta_tags %>
   
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 </head>
-<body>
+<body class="<%= @body[:classes].join(' ') %>">
 
-<a href="/" id="logo">Tourney Time</a>
+<div data-role="page">
 
-<%= yield %>
+  <div data-role="header">
+    <h1 class="ui-title" role="heading" aria-level="1"><%= @h1 %></h1>
+  </div>
+
+  <div data-role="content">
+    <%= yield %>
+  </div>
+  
+  <div data-role="footer">
+    <h6>&copy; Tourney Time</h6>
+  </div>
+  
+</div>
 
 </body>
 </html>

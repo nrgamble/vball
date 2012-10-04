@@ -1,16 +1,41 @@
-<h1><%= @tournament.name %></h1>
 <p><%= l @tournament.date, :format => :nice %></p>
-<%= link_to 'Edit Tournament', edit_tournament_url(@tournament) %>
 
-<h3>Pools</h3>
-<ul>
-  <% @tournament.pools.each do |pool| %>
-    <li><%= link_to pool.name, pool %></li>
-  <% end %>
-</ul>
-<%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %><br />
+<p>
+  <%= link_to 'Edit Tournament', edit_tournament_url(@tournament) %> |
+  <%= link_to 'Print Your Bracket', @tournament.bracket_url %>
+</p>
 
-<h3>Standings</h3>
+<div data-role="navbar">
+  <ul>
+    <li><a id="a_pools">Pools</a></li>
+    <li><a id="a_standings">Standings</a></li>
+  </ul>
+</div>
+
+<div id="pools">
+  <ul data-role="listview" data-inset="true">
+    <% @tournament.pools.each do |pool| %>
+      <li><%= link_to pool.name, pool %></li>
+    <% end %>
+  </ul>
+  <%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'e' %>
+</div>
+
 <%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
 
-<%= link_to 'Print Your Bracket', @tournament.bracket_url %>
+<style>
+  #pools, #standings { display: none; }
+</style>
+<script>
+  $(function () {
+    $('#a_pools').click(function (){
+      $('#standings').hide();
+      $('#pools').show();
+    });
+    $('#a_standings').click(function (){
+      $('#pools').hide();
+      $('#standings').show();
+    });
+    $('#a_pools').click();
+  });
+</script>

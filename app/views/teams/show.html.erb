@@ -1,27 +1,51 @@
-<h1><%= @team.name %></h1>
-<%= link_to 'Edit Team', edit_team_url(@team) %>
-<h2>Tournament: <%= link_to @team.tournament.name, @team.tournament %></h2>
-<h3>Pool: <%= link_to @team.pool.name, @team.pool %></h3>
+<h3><%= link_to @team.tournament.name, @team.tournament %></h3>
+
+<h4><%= link_to @team.pool.name, @team.pool %></h4>
+
 <p>Record: <%= @team.wins.length %> - <%= @team.losses.length %></p>
 
-<h3>Games</h3>
-<ul>
+<div data-role="navbar">
+  <ul>
+    <li><a id="a_games">Games</a></li>
+    <li><a id="a_h2h">Head 2 Head</a></li>
+  </ul>
+</div>
+
+<ul id="games" data-role="listview" data-inset="true">
   <% @team.games.each do |game| %>
     <li>
       <% if game.winner?(@team) %>
-        W vs. <%= link_to game.loser.name, game.loser %> (<%= game.score_winner %> - <%= game.score_loser %>)
+        <%= link_to "W vs. #{game.loser.name} (#{game.score_winner} - #{game.score_loser})", game %>
       <% else %>
-        L vs. <%= link_to game.winner.name, game.winner %> (<%= game.score_loser %> - <%= game.score_winner %>)
+        <%= link_to "L vs. #{game.winner.name} (#{game.score_loser} - #{game.score_winner})", game %>
       <% end %>
     </li>
   <% end %>
 </ul>
 
-<h3>Head 2 Head</h3>
-<ul>
+<ul id="h2h" data-role="listview" data-inset="true">
   <% @team.pool.teams.each do |team| %>
     <% if @team != team %>
       <li><%= team.name %>: <%= @team.head2head(team)[0] %> - <%= @team.head2head(team)[1] %></li>
     <% end %>
   <% end %>
 </ul>
+
+<style>
+  #h2h { display: none; }
+</style>
+<script>
+  $(document).bind('pageinit', function () {
+    $('#a_games').click(function (){
+      $('#h2h').hide();
+      $('#games').show();
+    });
+    $('#a_h2h').click(function (){
+      $('#games').hide();
+      $('#h2h').show();
+    });
+    $('#a_games').click();
+  });
+</script>
+
+<%= link_to 'Edit Team', edit_team_url(@team), 'data-role' => 'button', 'data-theme' => 'e' %>

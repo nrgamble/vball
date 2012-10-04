@@ -6,14 +6,19 @@ class TournamentsController < ApplicationController
     
   def new
     @tournament = Tournament.new
+    @tournament.date = DateTime.now
+    
+    @h1 = 'New Tournament'
   end
   
   def edit
     @tournament = Tournament.find(params[:id])
+    @h1 = 'Edit Tournament'
   end
 
   def show
     @tournament = Tournament.find(params[:id])
+    @h1 = @tournament.name
   end
 
   def create

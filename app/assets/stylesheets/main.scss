@@ -1,25 +1,18 @@
-@import "variables";
+/***/
 
-body {
-  font-family: $font;
-  padding: 10px;
-  line-height: 2em;
+td.num { text-align: right; }
+
+#pools_standings {
+  .ui-block-a, .ui-block-b {
+    padding: 12px 4px;
+  }
 }
 
-h1 { font-size: 1.3em; }
-
-td { padding: 4px; }
-
-input[type="text"] {
-  padding: 4px;
-  color: $gray;
+#standings {
+  width: 100%;
+  
+  td, th {
+    padding: 4px;
+  }
 }
-
-#logo {
-  font-size: 1.6em;
-  font-weight: bold;
-  color: red;
-  text-decoration: none;
-  display: block;
-  margin: 0 0 10px 0;
-}
+#standings th { text-align: left; }

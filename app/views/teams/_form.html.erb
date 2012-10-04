@@ -1,28 +1,34 @@
 <%= form_for @team do |f| %>
-  <p>
-    <%= f.label :tournament_id %>:
+  <div data-role="fieldcontain">
+    <%= f.label :tournament_id %>
     <% if @team.new? %>
       <% if params[:tournament_id] %>
-        <%= link_to @tournament.name, @tournament %> <%= f.hidden_field :tournament_id, { :value => @tournament.id } %>
+        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }, :disabled => true) %>
       <% else %>
-        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => '- Select Tournament -', :selected => params[:tournament_id] }) %></p>
+        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }) %>
       <% end %>
     <% else %>
-      <%= link_to @team.tournament.name, @team.tournament %> <%= f.hidden_field :tournament_id %>
+      <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => @team.tournament }, :disabled => true) %></p>
     <% end %>
-  </p>
-  <p>
-    <%= f.label :pool_id %>:
+  </div>
+  
+  <div data-role="fieldcontain">
+    <%= f.label :pool_id %>
     <% if @team.new? %>
       <% if params[:pool_id] %>
-        <%= link_to @pool.name, @pool %> <%= f.hidden_field :pool_id, { :value => @pool.id } %>
+        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }, :disabled => true) %>
       <% else %>
-        <%= f.label :pool_id %>: <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => '- Select Pool -', :selected => params[:pool_id] }) %>
+        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }) %>
       <% end %>
     <% else %>
-      <%= link_to @team.pool.name, @team.pool %> <%= f.hidden_field :pool_id %>
+      <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => @team.pool }, :disabled => true) %>
     <% end %>
-  </p>
-  <p><%= f.label :name %>: <%= f.text_field :name %></p>
-  <p><%= f.submit :Save %></p>
+  </div>
+  
+  <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
+  
+  <%= f.submit :Save %>
+  <% if ! @team.new? %>
+    <%= link_to 'Delete', @team, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
+  <% end %>
 <% end %>

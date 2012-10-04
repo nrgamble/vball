@@ -5,7 +5,7 @@ Vball::Application.routes.draw do
   resources :teams
   resources :games
   
-  root :to => "tournaments#index"
+  root :to => 'pages#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

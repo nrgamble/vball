@@ -6,14 +6,21 @@ class PoolsController < ApplicationController
 
   def show
     @pool = Pool.find(params[:id])
+    @h1 = @pool.name
   end
   
   def new
     @pool = Pool.new
+    @h1 = 'New Pool'
     
     if params[:tournament_id]
       @tournament = Tournament.find(params[:tournament_id])
     end
+  end
+  
+  def edit
+    @pool = Pool.find(params[:id])
+    @h1 = 'Edit Pool'
   end
 
   def create
@@ -24,10 +31,6 @@ class PoolsController < ApplicationController
     else
       render :action => :new
     end
-  end
-  
-  def edit
-    @pool = Pool.find(params[:id])
   end
   
   def update
