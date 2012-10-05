@@ -11,23 +11,19 @@ class GamesController < ApplicationController
   
   def new
     @game = Game.new
+    @tournament = Tournament.find(params[:tournament_id])
+    @pool = Pool.find(params[:pool_id])
+    @teams = @pool.teams
+    @game.away = @teams[0]
+    @game.home = @teams[1]
     @h1 = 'New Game'
-    
-    if params[:tournament_id]
-      @tournament = Tournament.find(params[:tournament_id])
-    end
-    
-    if params[:pool_id]
-      @pool  = Pool.find(params[:pool_id])
-      @teams = @pool.teams
-    else
-      @teams = Team.all
-    end
   end
   
   def edit
-    @game  = Game.find(params[:id])
-    @teams = @game.pool.teams
+    @game = Game.find(params[:id])
+    @tournament = @game.tournament
+    @pool = @game.pool
+    @teams = @pool.teams
     @h1 = 'Edit Game'
   end
 

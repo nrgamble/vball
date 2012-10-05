@@ -1,55 +1,34 @@
 <%= form_for @game do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <% if @game.new? %>
-      <% if params[:tournament_id] %>
-        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }, :disabled => true) %>
-      <% else %>
-        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }) %>
-      <% end %>
-    <% else %>
-      <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => @game.tournament }, :disabled => true) %>
-    <% end %>
+    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }, :disabled => true) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <% if @game.new? %>
-      <% if params[:pool_id] %>
-        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }, :disabled => true) %>
-      <% else %>
-        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }) %>
-      <% end %>
-    <% else %>
-      <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => @game.pool }, :disabled => true) %>
-    <% end %>
+    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }, :disabled => true) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :away_id %>
-    <% if @game.new? %>
-      <%= f.collection_select(:away_id, @teams, :id, :name, { :prompt => 'Select Away Team', :selected => params[:away_id] }) %>
-    <% else %>
-      <%= f.collection_select(:away_id, @teams, :id, :name, { :prompt => 'Select Away Team', :selected => @game.away }, :disabled => true) %>
-    <% end %>
+    <%= f.collection_select(:away_id, @teams, :id, :name, { :prompt => 'Select Away Team', :selected => @game.away.id }, :disabled => !@game.new?) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :score_away %>
-    <%= f.text_field :score_away, { :size => 4 } %>
+    <%= f.text_field :score_away, { :placeholder => 0  } %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :home_id %>
-    <% if @game.new? %>
-      <%= f.collection_select(:home_id, @teams, :id, :name, { :prompt => 'Select Home Team', :selected => params[:home_id] }) %>
-    <% else %>
-      <%= f.collection_select(:home_id, @teams, :id, :name, { :prompt => 'Select Home Team', :selected => @game.home }, :disabled => true) %>
-    <% end %>
+    <%= f.collection_select(:home_id, @teams, :id, :name, { :prompt => 'Select Home Team', :selected => @game.home.id }, :disabled => !@game.new?) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :score_home %>
-    <%= f.text_field :score_home, { :size => 4 } %>
+    <%= f.text_field :score_home, { :placeholder => 0 } %>
   </div>   
   
-  <%= f.submit :Save %>
-  <% if ! @game.new? %>
+  <%= f.submit :Save, 'data-theme' => 'b' %>
+  <% if @game.new? %>
+    <%= link_to 'Cancel', @pool, 'data-role' => 'button' %>
+  <% else %>
+    <%= link_to 'Cancel', @pool, 'data-role' => 'button' %>
     <%= link_to 'Delete', @game, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
   <% end %>
 <% end %>

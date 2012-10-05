@@ -1,33 +1,33 @@
 <p><%= l @tournament.date, :format => :nice %></p>
 
-<p>
-  <%= link_to 'Edit Tournament', edit_tournament_url(@tournament) %> |
-  <%= link_to 'Print Your Bracket', @tournament.bracket_url %>
-</p>
+<p><%= link_to 'Print Your Bracket', @tournament.bracket_url,
+               'data-role'=>"button", 'data-theme'=>"b", 'data-icon'=>"arrow-r", 'data-inline'=>"true", 'data-iconpos'=>"right", 'data-mini'=>"true" %></p>
 
 <div data-role="navbar">
   <ul>
+    <li><a id="a_standings" class="ui-btn-active ui-btn-up-c">Standings</a></li>
     <li><a id="a_pools">Pools</a></li>
-    <li><a id="a_standings">Standings</a></li>
   </ul>
 </div>
+
+<%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
 
 <div id="pools">
   <ul data-role="listview" data-inset="true">
     <% @tournament.pools.each do |pool| %>
       <li><%= link_to pool.name, pool %></li>
     <% end %>
+    <li data-theme="b"><%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %></li>
   </ul>
-  <%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'e' %>
 </div>
 
-<%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
+<%= link_to 'Edit Tournament', edit_tournament_url(@tournament), 'data-role' => 'button', 'data-theme' => 'e' %>
 
 <style>
-  #pools, #standings { display: none; }
+  #pools { display: none; }
 </style>
 <script>
-  $(function () {
+  $(document).bind('pageinit', function () {
     $('#a_pools').click(function (){
       $('#standings').hide();
       $('#pools').show();
@@ -36,6 +36,5 @@
       $('#pools').hide();
       $('#standings').show();
     });
-    $('#a_pools').click();
   });
 </script>

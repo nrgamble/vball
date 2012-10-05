@@ -1,5 +1,7 @@
 /***/
 
+a { text-decoration: none; }
+
 td.num { text-align: right; }
 
 #pools_standings {
@@ -14,5 +16,8 @@ td.num { text-align: right; }
   td, th {
     padding: 4px;
   }
+  
+  th {
+    text-align: right;
+  }
 }
-#standings th { text-align: left; }

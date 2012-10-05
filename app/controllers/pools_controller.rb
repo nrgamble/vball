@@ -11,15 +11,13 @@ class PoolsController < ApplicationController
   
   def new
     @pool = Pool.new
+    @tournament = Tournament.find(params[:tournament_id])
     @h1 = 'New Pool'
-    
-    if params[:tournament_id]
-      @tournament = Tournament.find(params[:tournament_id])
-    end
   end
   
   def edit
     @pool = Pool.find(params[:id])
+    @tournament = @pool.tournament
     @h1 = 'Edit Pool'
   end
 

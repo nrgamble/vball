@@ -3,8 +3,9 @@
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
   <div data-role="fieldcontain"><%= f.label :date %> <%= f.text_field :date, :value => l(@tournament.date, :format => :nice) %></div>
   
-  <%= f.submit :Save %>
+  <%= f.submit :Save, 'data-theme' => 'b' %>
   <% if ! @tournament.new? %>
+    <%= link_to 'Cancel', @tournament, 'data-role' => 'button' %>
     <%= link_to 'Delete', @tournament, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
   <% end %>
 <% end %>

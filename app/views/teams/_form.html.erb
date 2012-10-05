@@ -1,34 +1,21 @@
 <%= form_for @team do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <% if @team.new? %>
-      <% if params[:tournament_id] %>
-        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }, :disabled => true) %>
-      <% else %>
-        <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => params[:tournament_id] }) %>
-      <% end %>
-    <% else %>
-      <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :prompt => 'Select Tournament', :selected => @team.tournament }, :disabled => true) %></p>
-    <% end %>
+    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }, :disabled => true) %></p>
   </div>
   
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <% if @team.new? %>
-      <% if params[:pool_id] %>
-        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }, :disabled => true) %>
-      <% else %>
-        <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => params[:pool_id] }) %>
-      <% end %>
-    <% else %>
-      <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :prompt => 'Select Pool', :selected => @team.pool }, :disabled => true) %>
-    <% end %>
+    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }, :disabled => true) %>
   </div>
   
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
   
-  <%= f.submit :Save %>
-  <% if ! @team.new? %>
+  <%= f.submit :Save, 'data-theme' => 'b' %>
+  <% if @team.new? %>
+    <%= link_to 'Cancel', @pool, 'data-role' => 'button' %>
+  <% else %>
+    <%= link_to 'Cancel', @team, 'data-role' => 'button' %>
     <%= link_to 'Delete', @team, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
   <% end %>
 <% end %>

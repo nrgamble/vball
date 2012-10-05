@@ -11,22 +11,15 @@ class TeamsController < ApplicationController
   
   def new
     @team = Team.new
+    @tournament = Tournament.find(params[:tournament_id])
+    @pool = Pool.find(params[:pool_id])
     @h1 = 'New Team'
-    
-    if params[:tournament_id]
-      @tournament = Tournament.find(params[:tournament_id])
-    end
-        
-    if params[:pool_id]
-      @pool  = Pool.find(params[:pool_id])
-      @teams = @pool.teams
-    else
-      @teams = Team.all
-    end
   end
   
   def edit
     @team = Team.find(params[:id])
+    @tournament = @team.tournament
+    @pool = @team.pool
     @h1 = 'Edit Team'
   end
 
