@@ -1,10 +1,5 @@
-<ul id="pools">
+<ul>
   <% @pools.each do |pool| %>
-    <li>
-      <%= link_to pool.name, pool %>
-      <%= link_to 'x', pool, :confirm => 'Are you sure?', :method => :delete %>
-    </li>
+    <li><%= link_to pool.name, pool %></li>
   <% end %>
 </ul>
-
-<%= link_to 'New Pool', new_pool_url %>

@@ -1,5 +1,7 @@
 <p><%= l @tournament.date, :format => :nice %></p>
 
+<p><%= @tournament.location %></p>
+
 <p><%= link_to 'Print Your Bracket', @tournament.bracket_url,
                'data-role'=>"button", 'data-theme'=>"b", 'data-icon'=>"arrow-r", 'data-inline'=>"true", 'data-iconpos'=>"right", 'data-mini'=>"true" %></p>
 
@@ -10,31 +12,23 @@
   </ul>
 </div>
 
-<%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
+<div id="panes">
 
-<div id="pools">
-  <ul data-role="listview" data-inset="true">
-    <% @tournament.pools.each do |pool| %>
-      <li><%= link_to pool.name, pool %></li>
-    <% end %>
-    <li data-theme="b"><%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %></li>
-  </ul>
+  <div class="pane">
+    <%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
+  </div>
+
+  <div class="pane none">
+    <div id="pools">
+      <ul data-role="listview" data-inset="true">
+        <% @tournament.pools.each do |pool| %>
+          <li><%= link_to pool.name, pool %></li>
+        <% end %>
+        <li data-theme="b"><%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %></li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 <%= link_to 'Edit Tournament', edit_tournament_url(@tournament), 'data-role' => 'button', 'data-theme' => 'e' %>
-
-<style>
-  #pools { display: none; }
-</style>
-<script>
-  $(document).bind('pageinit', function () {
-    $('#a_pools').click(function (){
-      $('#standings').hide();
-      $('#pools').show();
-    });
-    $('#a_standings').click(function (){
-      $('#pools').hide();
-      $('#standings').show();
-    });
-  });
-</script>

@@ -1,7 +1,7 @@
 <%= form_for @pool do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }, :disabled => true) %>
+    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %>
   </div>
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
   

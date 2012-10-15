@@ -6,3 +6,4 @@ en:
   time:
     formats:
       nice: "%A, %B %e, %Y"
+      ymd: "%Y-%m-%d"

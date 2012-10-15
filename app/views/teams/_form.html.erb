@@ -1,12 +1,12 @@
 <%= form_for @team do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }, :disabled => true) %></p>
+    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %></p>
   </div>
   
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }, :disabled => true) %>
+    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }) %>
   </div>
   
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>

@@ -1,7 +1,8 @@
 <%= form_for @tournament do |f| %>
 
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
-  <div data-role="fieldcontain"><%= f.label :date %> <%= f.text_field :date, :value => l(@tournament.date, :format => :nice) %></div>
+  <div data-role="fieldcontain"><%= f.label :date %> <%= f.text_field :date, :value => l(@tournament.date, :format => :ymd) %></div>
+  <div data-role="fieldcontain"><%= f.label :location %> <%= f.text_field :location %></div>
   
   <%= f.submit :Save, 'data-theme' => 'b' %>
   <% if ! @tournament.new? %>

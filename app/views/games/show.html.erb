@@ -1,11 +1,12 @@
+<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+  <%= link_to @game.tournament.name, @game.tournament, 'data-role' => 'button', 'data-icon'=>"arrow-l" %>
+  <%= link_to @game.pool.name, @game.pool, 'data-role' => 'button', 'data-icon'=>"arrow-l" %>
+</div>
+
 <h3>
   <%= link_to @game.winner.name, @game.winner %> (<%= @game.score_winner%>)
   def.
   <%= link_to @game.loser.name, @game.loser %> (<%= @game.score_loser %>)
 </h3>
-
-<h4><%= link_to @game.tournament.name, @game.tournament %></h4>
-
-<h5><%= link_to @game.pool.name, @game.pool %></h5>
 
 <%= link_to 'Edit Game', edit_game_url(@game), 'data-role' => 'button', 'data-theme' => 'e' %>

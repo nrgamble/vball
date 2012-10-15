@@ -4,6 +4,8 @@ class Team
   key :tournament_id, ObjectId
   key :pool_id, ObjectId
   key :name, String
+  key :win_percentage, Float
+  key :plus_minus, Integer
 
   timestamps!
   
@@ -41,20 +43,20 @@ class Team
     return losses
   end
   
-  def win_percentage
+  def calculate_win_percentage
     self.games.size == 0 ? 0 : self.wins.size.to_f / self.games.size.to_f
   end
   
-  def differential
-    differential = 0
+  def calculate_plus_minus
+    plus_minus = 0
     self.games.each do |g|
       if g.winner?(self)
-        differential += (g.score_winner - g.score_loser)
+        plus_minus += (g.score_winner - g.score_loser)
       else
-        differential -= (g.score_winner - g.score_loser)
+        plus_minus -= (g.score_winner - g.score_loser)
       end
     end
-    return differential
+    return plus_minus
   end
   
   def head2head(team)
@@ -74,10 +76,10 @@ class Team
       elsif x.head2head(y)[0] < x.head2head(y)[1]
         return -1
       else
-        return x.differential <=> y.differential
+        return x.plus_minus.to_i <=> y.plus_minus.to_i
       end
     else
-      return x.win_percentage <=> y.win_percentage
+      return x.win_percentage.to_f <=> y.win_percentage.to_f
     end
   end
   

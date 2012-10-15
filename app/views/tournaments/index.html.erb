@@ -2,6 +2,5 @@
   <% @tournaments.each do |tournament| %>
     <li><%= link_to tournament.name, tournament %></li>
   <% end %>
+  <li data-theme="b"><%= link_to 'New Tournament', new_tournament_url %></li>
 </ul>
-
-<%= link_to 'New Tournament', new_tournament_url, 'data-role' => 'button', 'data-theme' => 'e' %>

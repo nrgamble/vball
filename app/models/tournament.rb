@@ -5,6 +5,7 @@ class Tournament
 
   key :name, String
   key :date, Time
+  key :location, String
 
   timestamps!
   

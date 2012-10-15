@@ -1,8 +1,8 @@
-<h3><%= link_to @pool.tournament.name, @pool.tournament %></h3>
+<%= link_to @pool.tournament.name, @pool.tournament, 'data-role' => 'button', 'data-icon'=>"arrow-l", 'data-mini' => true, 'data-inline' => true %>
 
 <p>
   <%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id),
-              'data-role'=>'button', 'data-icon'=>"plus", 'data-inline'=>"true", 'data-mini'=>"true" %>
+              'data-role'=>'button', 'data-icon'=>"plus", 'data-inline'=>"true", 'data-mini'=>"true", 'data-theme' => 'b' %>
 </p>
 
 <div data-role="navbar">
@@ -12,36 +12,25 @@
   </ul>
 </div>
 
-<%= render :partial => 'teams/standings', :locals => { :teams => @pool.standings } %>
+<div id="panes">
 
-<div id="games">
-  <ul data-role="listview" data-split-icon="gear" data-inset="true" data-split-theme="d">
-    <% @pool.games.each do |game| %>
-      <li>
-        <%= link_to "#{game.winner.name} (#{game.score_winner}) def. #{game.loser.name} (#{game.score_loser})", game %>
-        <%= link_to 'Edit', edit_game_url(game) %>
-      </li>
-    <% end %>
-    <% if @pool.teams.length >= 2 %>
-      <li data-theme="b"><%= link_to 'New Game', new_game_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %></li>
-    <% end %>
-  </ul>
+  <div class="pane">
+    <%= render :partial => 'teams/standings', :locals => { :teams => @pool.standings } %>
+  </div>
+
+  <div class="pane none">
+    <div id="games">
+      <ul data-role="listview" data-inset="true" data-split-theme="d">
+        <% @pool.games.each do |game| %>
+          <li><%= link_to "#{game.winner.name} (#{game.score_winner}) def. #{game.loser.name} (#{game.score_loser})", game %></li>
+        <% end %>
+        <% if @pool.teams.length >= 2 %>
+          <li data-theme="b"><%= link_to 'New Game', new_game_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 <%= link_to 'Edit Pool', edit_pool_url(@pool), 'data-role' => 'button', 'data-theme' => 'e' %>
-
-<style>
-  #games { display: none; }
-</style>
-<script>
-  $(document).bind('pageinit', function () {
-    $('#a_games').click(function (){
-      $('#standings').hide();
-      $('#games').show();
-    });
-    $('#a_standings').click(function (){
-      $('#games').hide();
-      $('#standings').show();
-    });
-  });
-</script>

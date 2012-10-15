@@ -15,7 +15,7 @@
       <td class="num"><%= team.wins.length %></td>
       <td class="num"><%= team.losses.length %></td>
       <td class="num"><%= format_win_percentage(team.win_percentage) %></td>
-      <td class="num"><%= team.differential %></td>
+      <td class="num"><%= '+' if team.plus_minus.to_i > 0 %><%= team.plus_minus.to_i %></td>
     </tr>
   <% end %>
 </tbody></table>

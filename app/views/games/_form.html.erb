@@ -1,11 +1,11 @@
 <%= form_for @game do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }, :disabled => true) %>
+    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }, :disabled => true) %>
+    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }) %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :away_id %>
@@ -28,7 +28,7 @@
   <% if @game.new? %>
     <%= link_to 'Cancel', @pool, 'data-role' => 'button' %>
   <% else %>
-    <%= link_to 'Cancel', @pool, 'data-role' => 'button' %>
+    <%= link_to 'Cancel', @game, 'data-role' => 'button' %>
     <%= link_to 'Delete', @game, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
   <% end %>
 <% end %>

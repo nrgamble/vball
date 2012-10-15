@@ -1,7 +1,5 @@
-<ul id="teams">
+<ul>
   <% @teams.each do |team| %>
     <li><%= link_to team.name, team %></li>
   <% end %>
 </ul>
-
-<%= link_to 'New Team', new_team_url %>

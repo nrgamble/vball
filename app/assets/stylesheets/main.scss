@@ -4,6 +4,8 @@ a { text-decoration: none; }
 
 td.num { text-align: right; }
 
+.none { display: none; }
+
 #pools_standings {
   .ui-block-a, .ui-block-b {
     padding: 12px 4px;
@@ -20,4 +22,11 @@ td.num { text-align: right; }
   th {
     text-align: right;
   }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+    
+    
+  }
+  .place { border: 0; }
 }
