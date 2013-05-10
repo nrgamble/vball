@@ -48,4 +48,15 @@ class TournamentsController < ApplicationController
     redirect_to tournaments_url
   end
 
+  def bracket
+    @tournament = Tournament.find(params[:id])
+    @h1 = @tournament.name
+
+    @format = 0
+    @teams  = @tournament.standings
+    @size   = 4 #@teams.size
+
+    @format = Tournament.bracket_create(@size)
+  end
+
 end

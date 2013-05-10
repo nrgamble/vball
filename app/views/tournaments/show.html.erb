@@ -2,8 +2,9 @@
 
 <p><%= @tournament.location %></p>
 
-<p><%= link_to 'Print Your Bracket', @tournament.bracket_url,
-               'data-role'=>"button", 'data-theme'=>"b", 'data-icon'=>"arrow-r", 'data-inline'=>"true", 'data-iconpos'=>"right", 'data-mini'=>"true" %></p>
+<p><%= link_to 'View Bracket', bracket_tournament_url(@tournament), 'target' => '_blank',
+               'data-role' => 'button', 'data-theme' => 'b', 'data-icon' => 'arrow-r', 'data-inline' => 'true', 'data-iconpos'=> 'right',
+               'data-mini' => 'true' %></p>
 
 <div data-role="navbar">
   <ul>

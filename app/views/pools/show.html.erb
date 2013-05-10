@@ -1,4 +1,5 @@
-<%= link_to @pool.tournament.name, @pool.tournament, 'data-role' => 'button', 'data-icon'=>"arrow-l", 'data-mini' => true, 'data-inline' => true %>
+<%= link_to @pool.tournament.name, @pool.tournament,
+            'data-role' => 'button', 'data-icon'=>"arrow-l", 'data-mini' => true, 'data-inline' => true %>
 
 <p>
   <%= link_to 'New Team', new_team_url(:tournament_id => @pool.tournament.id, :pool_id => @pool.id),
