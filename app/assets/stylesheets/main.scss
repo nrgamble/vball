@@ -34,3 +34,17 @@ td.num { text-align: right; }
 #bracket div {
   margin: 10px;
 }
+
+.top div {
+  margin: 4px 0 0 0 !important;
+  height: 10px;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.bottom div {
+  margin: 0 0 4px 0 !important;
+  height: 10px;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+}

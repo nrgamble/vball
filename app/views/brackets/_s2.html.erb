@@ -1,4 +1,10 @@
 <div>
-  <div><%= teams[0].place(@teams) %>. <%= teams[0].name %></div>
-  <div><%= teams[1].place(@teams) %>. <%= teams[1].name %></div>
+  <div class="top">
+    <%= teams[0].place(@teams) %>. <%= teams[0].name %>
+    <div></div>
+  </div>
+  <div class="bottom">
+    <div></div>
+    <%= teams[1].place(@teams) %>. <%= teams[1].name %>
+  </div>
 </div>

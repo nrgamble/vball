@@ -63,7 +63,8 @@ class TournamentsController < ApplicationController
     @filled = Tournament.bracket_fill(@bracket, @teams)
     @tleft, @tright = @filled
 
-    @seeded = bracket_seed(@tleft)
+    @tleft = bracket_seed(@tleft)
+    @tright = bracket_seed(@tright)
   end
 
   def bracket_seed(bracket)
@@ -71,13 +72,13 @@ class TournamentsController < ApplicationController
     if bracket[0].kind_of?(Array)
       html += bracket_seed(bracket[0])
     else
-      html += render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+      html = render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
     end
 
     if bracket[1].kind_of?(Array)
       html += bracket_seed(bracket[1])
     elsif ! bracket[1].nil?
-      html += render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+      html = render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
     end
     return html
   end

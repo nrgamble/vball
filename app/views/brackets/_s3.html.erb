@@ -1,8 +1,16 @@
-s3
 <div>
-  <div>1. Team A</div>
+  <div class="top">
+    <%= teams[0].place(@teams) %>. <%= teams[0].name %>
+    <div></div>
+  </div>
   <div>
-    <div>2. Team B</div>
-    <div>3. Team C</div>
+    <div class="top">
+      <%= teams[1].place(@teams) %>. <%= teams[1].name %>
+      <div></div>
+    </div>
+    <div class="bottom">
+      <div></div>
+      <%= teams[2].place(@teams) %>. <%= teams[2].name %>
+    </div>
   </div>
 </div>

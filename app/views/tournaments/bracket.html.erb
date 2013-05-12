@@ -1,10 +1,12 @@
 <h2><%= @size %> Team Tournament</h2>
 
-<%= @tleft.inspect %><br /><br />
-
-<%= @seeded %>
-
 <div id="bracket">
 
+  <div style="float:left">
+    <%= @tleft.html_safe %>
+  </div>
+  <div style="float:right">
+    <%= @tright.html_safe %>
+  </div>
 
 </div>
