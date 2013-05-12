@@ -31,20 +31,30 @@ td.num { text-align: right; }
   .place { border: 0; }
 }
 
-#bracket div {
-  margin: 10px;
+.s2, .s3 {
+  margin: 12px 0;
 }
 
-.top div {
-  margin: 4px 0 0 0 !important;
+.lines {
   height: 10px;
-  border-top: 1px solid #000;
-  border-left: 1px solid #000;
+  border: 1px solid #000;
 }
 
-.bottom div {
-  margin: 0 0 4px 0 !important;
-  height: 10px;
-  border-bottom: 1px solid #000;
-  border-left: 1px solid #000;
+.bleft {
+  float: left;
+
+  .lines { border-left: 0; }
 }
+.bright {
+  float: right;
+
+  .lines { border-right: 0; }
+}
+
+.top {
+  .lines { border-bottom: 0; }
+}
+.bottom {
+  .lines { border-top: 0; }
+}
+

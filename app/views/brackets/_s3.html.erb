@@ -1,16 +1,9 @@
-<div>
+<div class="s3">
   <div class="top">
-    <%= teams[0].place(@teams) %>. <%= teams[0].name %>
-    <div></div>
+    <%= render 'brackets/s1', :teams => [ teams[0] ] %>
+    <div class="lines"></div>
   </div>
   <div>
-    <div class="top">
-      <%= teams[1].place(@teams) %>. <%= teams[1].name %>
-      <div></div>
-    </div>
-    <div class="bottom">
-      <div></div>
-      <%= teams[2].place(@teams) %>. <%= teams[2].name %>
-    </div>
+    <%= render 'brackets/s2', :teams => [ teams[1], teams[2] ] %>
   </div>
 </div>
