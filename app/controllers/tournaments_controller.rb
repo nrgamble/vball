@@ -52,11 +52,34 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
     @h1 = @tournament.name
 
-    @format = 0
     @teams  = @tournament.standings
-    @size   = 4 #@teams.size
+    @size   = @teams.size
+    #@teams  = Array(1..7)
+    #@size   = 8
 
-    @format = Tournament.bracket_create(@size)
+    @bracket = Tournament.bracket_create(@size)
+    @left, @right = @bracket
+
+    @filled = Tournament.bracket_fill(@bracket, @teams)
+    @tleft, @tright = @filled
+
+    @seeded = bracket_seed(@tleft)
+  end
+
+  def bracket_seed(bracket)
+    html = ''
+    if bracket[0].kind_of?(Array)
+      html += bracket_seed(bracket[0])
+    else
+      html += render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+    end
+
+    if bracket[1].kind_of?(Array)
+      html += bracket_seed(bracket[1])
+    elsif ! bracket[1].nil?
+      html += render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+    end
+    return html
   end
 
 end

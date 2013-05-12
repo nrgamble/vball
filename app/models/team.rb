@@ -68,6 +68,10 @@ class Team
     end
     return head2head
   end
+
+  def place(standings)
+    return standings.index(self) + 1
+  end
   
   def self.sort_standings(x, y)
     if x.win_percentage == y.win_percentage
