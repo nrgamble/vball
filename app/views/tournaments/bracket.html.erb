@@ -1,12 +1,12 @@
-<h2><%= @size %> Team Tournament</h2>
+<h2><%= @tournament.teams.size %> Team Tournament</h2>
 
-<div id="bracket">
-
-  <div class="bleft">
-    <%= @tleft.html_safe %>
-  </div>
-  <div class="bright">
-    <%= @tright.html_safe %>
-  </div>
-
+<div id="bracket" class="bleft">
+  <% @rounds.each do |r| %>
+    <div class="round">
+      <%= r.html_safe %>
+    </div>
+  <% end %>
 </div>
+
+<div style="clear:both"></div>
+<br /><br /><%= debug @bracket.games %><br /><br />

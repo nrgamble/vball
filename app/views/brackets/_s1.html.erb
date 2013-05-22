@@ -1,1 +1,7 @@
-<div><%= teams[0].place(@teams) %>. <%= teams[0].name %></div>
+<div>
+  <% if team.nil? %>
+    Bye
+  <% else %>
+    <%= team.place(@teams) %>. <%= team.name %>
+  <% end %>
+</div>

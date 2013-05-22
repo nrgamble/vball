@@ -13,20 +13,20 @@ class Team
   belongs_to :pool
   
   def destroy
-    self.games.each do |g|
+    games.each do |g|
       g.destroy
     end
     super
   end
   
   def games
-    Game.where(:$or => [ { :away_id => self.id }, { :home_id => self.id } ]).all
+    Game.where(:bracket_id => nil, :$or => [ { :away_id => id }, { :home_id => id } ]).all
   end
   
   def wins
     wins = Array.new
-    self.games.each do |g|
-      if (g.home_id == self.id and g.score_home > g.score_away) or (g.away_id == self.id and g.score_away > g.score_home)
+    games.each do |g|
+      if (g.home_id == id and g.score_home > g.score_away) or (g.away_id == id and g.score_away > g.score_home)
         wins << g
       end
     end
@@ -36,7 +36,7 @@ class Team
   def losses
     losses = Array.new
     self.games.each do |g|
-      if (g.home_id == self.id and g.score_home < g.score_away) or (g.away_id == self.id and g.score_away < g.score_home)
+      if (g.home_id == id and g.score_home < g.score_away) or (g.away_id == id and g.score_away < g.score_home)
         losses << g
       end
     end
@@ -44,12 +44,12 @@ class Team
   end
   
   def calculate_win_percentage
-    self.games.size == 0 ? 0 : self.wins.size.to_f / self.games.size.to_f
+    games.size == 0 ? 0 : wins.size.to_f / games.size.to_f
   end
   
   def calculate_plus_minus
     plus_minus = 0
-    self.games.each do |g|
+    games.each do |g|
       if g.winner?(self)
         plus_minus += (g.score_winner - g.score_loser)
       else
@@ -61,7 +61,7 @@ class Team
   
   def head2head(team)
     head2head = [0, 0]
-    self.games.each do |g|
+    games.each do |g|
       if g.home_id == team.id or g.away_id == team.id
         g.winner?(self) ? head2head[0] += 1 : head2head[1] += 1
       end

@@ -1,10 +1,12 @@
 <div class="s2">
-  <div class="top">
-    <%= render 'brackets/s1', :teams => [ teams[0] ] %>
-    <div class="lines"></div>
-  </div>
-  <div class="bottom">
-    <div class="lines"></div>
-    <%= render 'brackets/s1', :teams => [ teams[1] ] %>
+  <div class="teams">
+    <div class="top">
+      <%= render 'brackets/s1', :team => game.home %>
+      <div class="lines"></div>
+    </div>
+    <div class="bottom">
+      <div class="lines"></div>
+      <%= render 'brackets/s1', :team => game.away %>
+    </div>
   </div>
 </div>

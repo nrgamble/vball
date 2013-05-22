@@ -25,6 +25,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(params[:tournament])
 
     if @tournament.save
+      Bracket.new({ :tournament_id => @tournament.id }).save # TODO: do this with model association create
       redirect_to @tournament
     else
       render :action => :new
@@ -50,36 +51,41 @@ class TournamentsController < ApplicationController
 
   def bracket
     @tournament = Tournament.find(params[:id])
+    @bracket    = @tournament.bracket
+    @teams      = @tournament.standings
+
+    # temp clear out games until i get this all working
+    @bracket.games.each do |g|
+      g.destroy
+    end
+
+    @rounds = []
+    (1..@bracket.num_rounds).each do |r|
+      #@rounds << r
+      #@rounds << @bracket.round(r)
+      @rounds << bracket_render(@bracket.round(r))
+    end
+
     @h1 = @tournament.name
-
-    @teams  = @tournament.standings
-    @size   = @teams.size
-    #@teams  = Array(1..7)
-    #@size   = 8
-
-    @bracket = Tournament.bracket_create(@size)
-    @left, @right = @bracket
-
-    @filled = Tournament.bracket_fill(@bracket, @teams)
-    @tleft, @tright = @filled
-
-    @tleft = bracket_seed(@tleft)
-    @tright = bracket_seed(@tright)
   end
 
-  def bracket_seed(bracket)
+  def bracket_render(bracket)
     html = ''
+
     if bracket[0].kind_of?(Array)
-      html += bracket_seed(bracket[0])
+      html += bracket_render(bracket[0])
     else
-      html = render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+      html  = render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[0] } )
+      html += render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[1] } ) if ! bracket[1].nil?
     end
 
     if bracket[1].kind_of?(Array)
-      html += bracket_seed(bracket[1])
-    elsif ! bracket[1].nil?
-      html = render_to_string(:partial => "brackets/s#{bracket.size}", :layout => false, :locals => { :teams => bracket } )
+      html += bracket_render(bracket[1])
+    else
+      html  = render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[0] } )
+      html += render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[1] } ) if ! bracket[1].nil?
     end
+
     return html
   end
 
