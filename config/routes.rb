@@ -1,13 +1,12 @@
 Vball::Application.routes.draw do
   
   resources :tournaments
+  resources :brackets
   resources :pools
   resources :teams
   resources :games
   
   root :to => 'pages#index'
-
-  match 'tournaments/:id/bracket' => 'tournaments#bracket', :as => :bracket_tournament
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
