@@ -43,6 +43,35 @@ class Game
   def score_loser
     score_home > score_away ? score_away : score_home
   end
+
+  def over?
+    not score_home.nil? and not score_home.zero? and score_home != score_away
+  end
+
+  # Bracket
+
+  def index
+    bracket.games.index(self) if not bracket.nil?
+  end
+
+  def index_in_round
+    bracket.games_in_round(round).index(self) if not bracket.nil?
+  end
+
+  def round
+    i = 0
+    (1..bracket.num_rounds).each do |r|
+      i += bracket.num_games_in_round(r)
+      return r if i > index
+    end
+  end
+
+  def previous_games
+    return nil if round == 1
+
+    g = bracket.games_in_round(round - 1)
+    g.slice(index_in_round * 2, 2)
+  end
   
   private
   

@@ -16,10 +16,6 @@ class Bracket
   #   end
   # end
 
-  def num_games
-    num_teams - 1
-  end
-
   def num_teams
     i = 1
     x = 0
@@ -31,6 +27,15 @@ class Bracket
     return x
   end
 
+  def num_games
+    num_teams - 1
+  end
+
+  # TODO: replace with log(base, num) when you get Ruby 1.9.x upgrade working
+  def num_rounds
+    (Math.log(teams.size) / Math.log(2)).to_i
+  end
+
   def teams
     standings = tournament.standings
     (1..(num_teams - tournament.teams.size)).each do
@@ -39,21 +44,24 @@ class Bracket
     return standings
   end
 
-  # TODO: replace with log(base, num) when you get Ruby 1.9.x upgrade working
-  def num_rounds
-    (Math.log(teams.size) / Math.log(2)).to_i
+  def rounds
+    rounds = []
+    (1..num_rounds).each do |r|
+      rounds << round(r)
+    end
+    return rounds
   end
 
   def round(r)
     if r == 1
-      seeded
+      return seeded
     else
       if games_in_round(r).size.zero?
         (1..num_games_in_round(r)).each do
           games.create({ :tournament_id => tournament.id })
         end
       end
-      games_in_round(r)
+      return games_in_round(r)
     end
   end
 
@@ -93,8 +101,10 @@ private
     else
       games.create({
         :tournament_id => tournament.id,
-        :home_id       => _teams[0].nil? ? nil : _teams[0].id,
-        :away_id       => _teams[1].nil? ? nil : _teams[1].id
+        :home_id       => _teams[0].id,
+        :away_id       => _teams[1].id,
+        :score_home    => _teams[1].new? ? 1 : 0,
+        :score_away    => 0
       })
     end
   end

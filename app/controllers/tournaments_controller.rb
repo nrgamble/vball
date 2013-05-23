@@ -60,10 +60,8 @@ class TournamentsController < ApplicationController
     end
 
     @rounds = []
-    (1..@bracket.num_rounds).each do |r|
-      #@rounds << r
-      #@rounds << @bracket.round(r)
-      @rounds << bracket_render(@bracket.round(r))
+    @bracket.rounds.each do |r|
+      @rounds << bracket_render(r)
     end
 
     @h1 = @tournament.name
@@ -75,18 +73,46 @@ class TournamentsController < ApplicationController
     if bracket[0].kind_of?(Array)
       html += bracket_render(bracket[0])
     else
-      html  = render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[0] } )
-      html += render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[1] } ) if ! bracket[1].nil?
+      html = bracket_render_game(bracket[0])
+      if not bracket[1].nil?
+        html += bracket_render_game(bracket[1])
+      end
     end
 
     if bracket[1].kind_of?(Array)
       html += bracket_render(bracket[1])
     else
-      html  = render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[0] } )
-      html += render_to_string(:partial => 'brackets/s2', :locals => { :game => bracket[1] } ) if ! bracket[1].nil?
+      html = bracket_render_game(bracket[0])
+      if not bracket[1].nil?
+        html += bracket_render_game(bracket[1])
+      end
     end
 
     return html
+  end
+
+  def bracket_render_game(game)
+    view_home = 'brackets/s1'
+    prev_home = nil
+    if game.home.nil? and not game.previous_games.nil?
+      view_home = 'brackets/s1u'
+      prev_home = game.previous_games.shift
+    end
+
+    view_away = 'brackets/s1'
+    prev_away = nil
+    if game.away.nil? and not game.previous_games.nil?
+      view_away = 'brackets/s1u'
+      prev_away = game.previous_games.pop
+    end
+
+    render_to_string(:partial => 'brackets/s2', :locals => {
+      :game      => game,
+      :view_home => view_home,
+      :prev_home => prev_home,
+      :view_away => view_away,
+      :prev_away => prev_away
+    })
   end
 
 end

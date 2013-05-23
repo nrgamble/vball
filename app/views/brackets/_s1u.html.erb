@@ -1,0 +1,7 @@
+<% if team.nil? %>
+  <% if prev.over? %>
+    <%= render 'brackets/s1', :team => prev.winner %>
+  <% end %>
+<% else %>
+  <%= render 'brackets/s1', :team => team %>
+<% end %>
