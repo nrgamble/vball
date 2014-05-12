@@ -9,13 +9,6 @@ class Bracket
 
   many :games
 
-  # def create_games
-  #   i = 0
-  #   while i < num_games do
-  #     games.create({ :tournament_id => tournament.id })
-  #   end
-  # end
-
   def num_teams
     i = 1
     x = 0
@@ -45,10 +38,12 @@ class Bracket
   end
 
   def rounds
+  # benchmark('finding rounds') do
     rounds = []
     (1..num_rounds).each do |r|
       rounds << round(r)
     end
+  # end
     return rounds
   end
 
@@ -87,6 +82,10 @@ class Bracket
     _seed(layout, teams)
   end
 
+  def generated?
+    games.size == num_games
+  end
+
 private
 
   def _layout(_size)
@@ -96,20 +95,24 @@ private
   def _seed(_bracket, _teams)
     if _bracket.kind_of?(Array)
       lbracket, rbracket = _bracket
-      lteams, rteams     = Bracket._split(_teams)
+      lteams, rteams     = _split(_teams)
       return [ _seed(lbracket, lteams), _seed(rbracket, rteams) ]
     else
-      games.create({
-        :tournament_id => tournament.id,
-        :home_id       => _teams[0].id,
-        :away_id       => _teams[1].id,
-        :score_home    => _teams[1].new? ? 1 : 0,
-        :score_away    => 0
-      })
+      if generated?
+        _search_games(_teams[0].id, _teams[1].id)
+      else
+        games.create({
+          :tournament_id => tournament.id,
+          :home_id       => _teams[0].id,
+          :away_id       => _teams[1].id,
+          :score_home    => _teams[1].new? ? 1 : 0,
+          :score_away    => 0
+        })
+      end
     end
   end
 
-  def self._split(_teams)
+  def _split(_teams)
     left = []
     0.step(_teams.size, 4) { |i|
       left << _teams[i - 1] unless i.zero?
@@ -121,6 +124,12 @@ private
       right << _teams[i] unless _teams[i].nil?
     }
     return [ left, right ]
+  end
+
+  def _search_games(home_id, away_id)
+    games.each do |g|
+      return g if g.home_id = home_id and g.away_id = away_id
+    end
   end
   
 end

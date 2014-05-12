@@ -1,12 +1,22 @@
+<%#= debug game %>
+<%= game.class.name %> : <%= score_home %> <%= score_away %>
+<%= form_for game do |f| %>
+<%= game.inspect %>
+
 <div class="s2">
   <div class="teams">
     <div class="top">
       <%= render view_home, :game => game, :team => game.home, :prev => prev_home %>
+      <%= f.text_field :score_home, { :placeholder => 0  } %> <%= game.score_home %> <%= game.home_id %>
       <div class="lines"></div>
     </div>
     <div class="bottom">
       <div class="lines"></div>
       <%= render view_away, :game => game, :team => game.away, :prev => prev_away %>
+      <%= f.text_field :score_away, { :placeholder => 0 } %> <%= game.score_away %> <%= game.away_id %>
     </div>
   </div>
+  <%= f.submit :Save, 'data-theme' => 'b' %>
 </div>
+
+<% end %>
