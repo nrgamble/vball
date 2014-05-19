@@ -11,6 +11,7 @@ class GamesController < ApplicationController
   
   def new
     @game = Game.new
+    @game.date = DateTime.now
     @tournament = Tournament.find(params[:tournament_id])
     @pool = Pool.find(params[:pool_id])
     @teams = @pool.teams
@@ -41,7 +42,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     if @game.update_attributes(params[:game])
-      redirect_to @game.pool
+      respond_to do |format|
+        format.html { redirect_to @game.bracket_id.nil? ? @game.pool : @game.bracket }
+        format.json { render :json => true }
+      end
     else
       redirect_to edit_game_url(@game)
     end

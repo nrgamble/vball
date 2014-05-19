@@ -7,3 +7,5 @@ en:
     formats:
       nice: "%A, %B %e, %Y"
       ymd: "%Y-%m-%d"
+      his: "%H:%M"
+      nicetime: "%r"

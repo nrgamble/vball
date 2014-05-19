@@ -53,7 +53,8 @@ class Bracket
     else
       if games_in_round(r).size.zero?
         (1..num_games_in_round(r)).each do
-          games.create({ :tournament_id => tournament.id })
+          games.create({ :tournament_id => tournament.id, :score_home => 0, :score_away => 0 })
+          # games.new(:tournament_id => tournament.id)
         end
       end
       return games_in_round(r)
@@ -105,7 +106,7 @@ private
           :tournament_id => tournament.id,
           :home_id       => _teams[0].id,
           :away_id       => _teams[1].id,
-          :score_home    => _teams[1].new? ? 1 : 0,
+          :score_home    => 0,#_teams[1].new? ? 1 : 0,
           :score_away    => 0
         })
       end

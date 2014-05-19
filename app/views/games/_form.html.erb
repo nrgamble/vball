@@ -1,26 +1,40 @@
 <%= form_for @game do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %>
+    <%#= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %>
+    <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
+    <%= @tournament.name %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }) %>
+    <%#= f.collection_select(:pool_id, @tournament.pools, :id, :name, { :selected => @pool.id }) %>
+    <%= f.hidden_field(:pool_id, :value => @pool.id) %>
+    <%= @pool.name %>
+  </div>
+  <div data-role="fieldcontain">
+    <%= f.label :date %>
+    <%= f.text_field :date, { :value => l(@game.date, :format => :his) } %>
+  </div>
+  <div data-role="fieldcontain">
+    <%= f.label :court_id %>
+    <%= f.text_field :court_id, { :placeholder => 0 } %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :away_id %>
-    <%= f.collection_select(:away_id, @teams, :id, :name, { :prompt => 'Select Away Team', :selected => @game.away.id }, :disabled => !@game.new?) %>
+    <%= f.collection_select(:away_id, @pool.teams, :id, :name,
+        { :prompt => 'Select Away Team', :selected => @game.away.id }, :disabled => ! @game.new?) %>
   </div>
   <div data-role="fieldcontain">
-    <%= f.label :score_away %>
+    <%= f.label :score_away, "Away Score" %>
     <%= f.text_field :score_away, { :placeholder => 0  } %>
   </div>
   <div data-role="fieldcontain">
     <%= f.label :home_id %>
-    <%= f.collection_select(:home_id, @teams, :id, :name, { :prompt => 'Select Home Team', :selected => @game.home.id }, :disabled => !@game.new?) %>
+    <%= f.collection_select(:home_id, @pool.teams, :id, :name,
+        { :prompt => 'Select Home Team', :selected => @game.home.id }, :disabled => ! @game.new?) %>
   </div>
   <div data-role="fieldcontain">
-    <%= f.label :score_home %>
+    <%= f.label :score_home, "Home Score" %>
     <%= f.text_field :score_home, { :placeholder => 0 } %>
   </div>   
   

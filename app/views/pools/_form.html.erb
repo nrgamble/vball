@@ -1,8 +1,10 @@
 <%= form_for @pool do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %>
+    <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
+    <%= @tournament.name %>
   </div>
+
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
   
   <%= f.submit :Save, 'data-theme' => 'b' %>

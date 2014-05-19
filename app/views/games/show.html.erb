@@ -3,6 +3,12 @@
   <%= link_to @game.pool.name, @game.pool, 'data-role' => 'button', 'data-icon'=>"arrow-l" %>
 </div>
 
+<p>
+  <%= l @game.date, :format => :nicetime %>
+  --
+  Court <%= @game.court_id %>
+</p>
+
 <h3>
   <%= link_to @game.winner.name, @game.winner %> (<%= @game.score_winner%>)
   def.

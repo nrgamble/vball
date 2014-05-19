@@ -27,7 +27,8 @@ class BracketsController < ApplicationController
     html = ''
 
     if bracket[0].kind_of?(Array)
-      html += bracket_render(bracket[0].clone)
+      # html += bracket_render(bracket[0].clone)
+      html += bracket_render(bracket[0])
     else
       html  = bracket_render_game(bracket[0])
       html += bracket_render_game(bracket[1]) unless bracket[1].nil?
@@ -58,10 +59,9 @@ class BracketsController < ApplicationController
       prev_away = game.previous_games.pop
     end
 
+    g = game.away.nil? ? 'nil' : game.away.name
     render_to_string(:partial => 'brackets/s2', :locals => {
       :game      => game,
-      :score_home => game.score_home,
-      :score_away => game.score_away,
       :view_home => view_home,
       :prev_home => prev_home,
       :view_away => view_away,

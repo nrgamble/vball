@@ -1,6 +1,6 @@
-<p><%= l @tournament.date, :format => :nice %></p>
+<p>When: <%= l @tournament.date, :format => :nice %></p>
 
-<p><%= @tournament.location %></p>
+<p>Where: <%= @tournament.location %></p>
 
 <p><%= link_to 'View Bracket', @tournament.bracket, 'target' => '_blank',
                'data-role' => 'button', 'data-theme' => 'b', 'data-icon' => 'arrow-r', 'data-inline' => 'true', 'data-iconpos'=> 'right',
@@ -8,18 +8,14 @@
 
 <div data-role="navbar">
   <ul>
-    <li><a id="a_standings" class="ui-btn-active ui-btn-up-c">Standings</a></li>
-    <li><a id="a_pools">Pools</a></li>
+    <li><a id="a_pools" class="ui-btn-active ui-btn-up-c">Pools</a></li>
+    <li><a id="a_standings">Standings</a></li>
   </ul>
 </div>
 
 <div id="panes">
 
   <div class="pane">
-    <%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
-  </div>
-
-  <div class="pane none">
     <div id="pools">
       <ul data-role="listview" data-inset="true">
         <% @tournament.pools.each do |pool| %>
@@ -28,6 +24,10 @@
         <li data-theme="b"><%= link_to 'New Pool', new_pool_url(:tournament_id => @tournament.id) %></li>
       </ul>
     </div>
+  </div>
+
+  <div class="pane none">
+    <%= render :partial => 'teams/standings', :locals => { :teams => @tournament.standings } %>
   </div>
 
 </div>

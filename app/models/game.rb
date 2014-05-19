@@ -6,6 +6,8 @@ class Game
   key :bracket_id, ObjectId
   key :away_id, ObjectId
   key :home_id, ObjectId
+  key :court_id, Integer
+  key :date, Time
   key :score_away, Integer
   key :score_home, Integer
 
@@ -19,6 +21,16 @@ class Game
   
   before_save :same_team
   after_save  :teams_caches
+
+  def score_home
+    s = read_attribute(:score_home)
+    s.nil? ? 0 : s
+  end
+ 
+  def score_away
+    s = read_attribute(:score_away)
+    s.nil? ? 0 : s
+  end
   
   def winner
     score_home > score_away ? home : away
@@ -45,7 +57,7 @@ class Game
   end
 
   def over?
-    not score_home.nil? and not score_home.zero? and score_home != score_away
+    score_home != score_away
   end
 
   # Bracket

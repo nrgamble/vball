@@ -12,7 +12,11 @@ class Pool
   many :games
   
   def standings
-    self.teams.sort! { |x,y| Team.sort_standings(y, x) }
+    teams.sort! { |x,y| Team.sort_standings(y, x) }
+  end
+
+  def schedule
+    games.sort! { |x,y| x.date <=> y.date }
   end
   
 end

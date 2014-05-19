@@ -1,12 +1,13 @@
 <%= form_for @team do |f| %>
   <div data-role="fieldcontain">
     <%= f.label :tournament_id %>
-    <%= f.collection_select(:tournament_id, Tournament.all, :id, :name, { :selected => @tournament.id }) %></p>
+    <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
+    <%= @tournament.name %>
   </div>
   
   <div data-role="fieldcontain">
     <%= f.label :pool_id %>
-    <%= f.collection_select(:pool_id, Pool.all, :id, :name, { :selected => @pool.id }) %>
+    <%= f.collection_select(:pool_id, @tournament.pools, :id, :name, { :include_blank => true, :selected => params[:pool_id] }) %>
   </div>
   
   <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>

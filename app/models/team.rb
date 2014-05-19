@@ -58,6 +58,18 @@ class Team
     end
     return plus_minus
   end
+
+  def opponents
+    opponents = []
+    games.each do |g|
+      if g.home_id == id
+        opponents << g.away
+      else
+        opponents << g.home
+      end
+    end
+    return opponents
+  end
   
   def head2head(team)
     head2head = [0, 0]
