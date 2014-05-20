@@ -4,6 +4,7 @@ class Team
   key :tournament_id, ObjectId
   key :pool_id, ObjectId
   key :name, String
+  key :email, String
   key :win_percentage, Float
   key :plus_minus, Integer
 
@@ -63,9 +64,9 @@ class Team
     opponents = []
     games.each do |g|
       if g.home_id == id
-        opponents << g.away
+        opponents << g.away if opponents.index(g.away).nil?
       else
-        opponents << g.home
+        opponents << g.home if opponents.index(g.home).nil?
       end
     end
     return opponents

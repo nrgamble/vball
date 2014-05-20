@@ -3,4 +3,8 @@ $(document).bind('pageinit', function () {
     $('.pane').hide();
     $('#' + this.id.replace(/a_/, '')).parent().show();
   });
+
+  $('button[type=submit]').click(function () {
+    $('form').submit();
+  });
 });

@@ -1,12 +1,22 @@
+<% content_for :header do %>
+  <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Back</a>
+  <h1 class="ui-title" role="heading" aria-level="1"><%= "#{@game.away.name} @ #{@game.home.name}" %></h1>
+  <%= link_to '', edit_game_path(@game), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-gear' %>
+<% end %>
+
 <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <%= link_to @game.tournament.name, @game.tournament, 'data-role' => 'button', 'data-icon'=>"arrow-l" %>
-  <%= link_to @game.pool.name, @game.pool, 'data-role' => 'button', 'data-icon'=>"arrow-l" %>
+  <%= link_to @game.tournament.name, @game.tournament, 'data-role' => 'button', 'data-icon' => "carat-u" %>
+  <%= link_to @game.pool.name, @game.pool, 'data-role' => 'button', 'data-icon' => "carat-u" %>
 </div>
 
 <p>
-  <%= l @game.date, :format => :nicetime %>
-  --
-  Court <%= @game.court_id %>
+  <%= l @game.date.in_time_zone('America/Chicago'), :format => :nicetime %>
+  <% if @game.court_id %>
+    <br>Court <%= @game.court_id %>
+  <% end %>
+  <% unless @game.ref.nil? %>
+    <br>Referee: <%= link_to @game.ref.name, @game.ref %>
+  <% end %>
 </p>
 
 <h3>
@@ -14,5 +24,3 @@
   def.
   <%= link_to @game.loser.name, @game.loser %> (<%= @game.score_loser %>)
 </h3>
-
-<%= link_to 'Edit Game', edit_game_url(@game), 'data-role' => 'button', 'data-theme' => 'e' %>

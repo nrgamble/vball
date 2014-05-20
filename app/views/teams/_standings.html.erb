@@ -1,4 +1,5 @@
-<table id="standings"><tbody>
+<table id="standings">
+  <thead>
   <tr>
     <th></th>
     <th></th>
@@ -7,6 +8,8 @@
     <th class="num">%</th>
     <th class="num">+/-</th>
   </tr>
+  </thead>
+  <tbody>
   <% i = 0 %>
   <% teams.each do |team| %>
     <tr>
@@ -18,4 +21,5 @@
       <td class="num"><%= '+' if team.plus_minus.to_i > 0 %><%= team.plus_minus.to_i %></td>
     </tr>
   <% end %>
-</tbody></table>
+  </tbody>
+</table>

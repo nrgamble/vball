@@ -1,1 +1,9 @@
-<%= render :partial => 'form' %>
+<%= form_for @team do |f| %>
+  <% content_for :header do %>
+    <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</a>
+    <h1 class="ui-title" role="heading" aria-level="1"><%= @team.name %></h1>
+    <%= f.button :Save, :class => "ui-btn-right ui-btn ui-btn-active ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check" %>
+  <% end %>
+
+  <%= render :partial => 'form', :locals => { :f => f } %>
+<% end %>

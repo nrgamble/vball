@@ -3,6 +3,7 @@ require 'mongo'
 
 source 'https://rubygems.org'
 
+# TODO: upgrade Rails
 gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
@@ -39,4 +40,8 @@ gem 'jquery-rails'
 # gem 'ruby-debug'
 
 # MongoDB ORM
+# TODO: switch to mongoid
 gem 'mongo_mapper'
+
+# User authentication
+#gem 'devise'

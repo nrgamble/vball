@@ -7,6 +7,7 @@ class Game
   key :away_id, ObjectId
   key :home_id, ObjectId
   key :court_id, Integer
+  key :ref_id, ObjectId
   key :date, Time
   key :score_away, Integer
   key :score_home, Integer
@@ -18,6 +19,7 @@ class Game
   belongs_to :bracket
   belongs_to :home, :class_name => 'Team'
   belongs_to :away, :class_name => 'Team'
+  belongs_to :ref,  :class_name => 'Team'
   
   before_save :same_team
   after_save  :teams_caches

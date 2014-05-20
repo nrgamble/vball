@@ -1,12 +1,10 @@
-<%= form_for @tournament do |f| %>
-
-  <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
-  <div data-role="fieldcontain"><%= f.label :date %> <%= f.text_field :date, :value => l(@tournament.date, :format => :ymd) %></div>
-  <div data-role="fieldcontain"><%= f.label :location %> <%= f.text_field :location %></div>
+<div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>
+<div data-role="fieldcontain">
+  <%= f.label :date %>
+  <%= f.text_field :date, :value => l(@tournament.date, :format => :ymd), 'data-role' => 'date' %>
+</div>
+<div data-role="fieldcontain"><%= f.label :location %> <%= f.text_field :location %></div>
   
-  <%= f.submit :Save, 'data-theme' => 'b' %>
-  <% if ! @tournament.new? %>
-    <%= link_to 'Cancel', @tournament, 'data-role' => 'button' %>
-    <%= link_to 'Delete', @tournament, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'e' %>
-  <% end %>
+<% if not @tournament.new? %>
+  <%= link_to 'Delete', @tournament, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'b' %>
 <% end %>

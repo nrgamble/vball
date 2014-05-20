@@ -2,10 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
   time:
     formats:
       nice: "%A, %B %e, %Y"
+      nicetime: "%-l:%M%p"
+      nicedatetime: "%A, %B %e, %Y at %-l:%M%p"
       ymd: "%Y-%m-%d"
-      his: "%H:%M"
-      nicetime: "%r"
+      his: "%-l:%M"

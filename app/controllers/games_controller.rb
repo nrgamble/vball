@@ -6,7 +6,6 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @h1   = "#{@game.away.name} @ #{@game.home.name}" 
   end
   
   def new
@@ -14,10 +13,6 @@ class GamesController < ApplicationController
     @game.date = DateTime.now
     @tournament = Tournament.find(params[:tournament_id])
     @pool = Pool.find(params[:pool_id])
-    @teams = @pool.teams
-    @game.away = @teams[0]
-    @game.home = @teams[1]
-    @h1 = 'New Game'
   end
   
   def edit
@@ -25,7 +20,6 @@ class GamesController < ApplicationController
     @tournament = @game.tournament
     @pool = @game.pool
     @teams = @pool.teams
-    @h1 = 'Edit Game'
   end
 
   def create
