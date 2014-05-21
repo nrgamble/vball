@@ -11,13 +11,13 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @tournament = Tournament.find(params[:tournament_id])
-    @pool = Pool.find(params[:pool_id])
+    @pool_id ||= params[:pool_id]
   end
   
   def edit
     @team = Team.find(params[:id])
     @tournament = @team.tournament
-    @pool = @team.pool
+    @pool_id = @team.pool.id
   end
 
   def create

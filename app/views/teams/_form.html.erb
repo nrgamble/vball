@@ -1,12 +1,12 @@
 <div data-role="fieldcontain">
   <%= f.label :tournament_id %>
   <%= f.hidden_field(:tournament_id, :value => @tournament.id) %>
-  <%= @tournament.name %>
+  <div class="value"><%= @tournament.name %></div>
 </div>
   
 <div data-role="fieldcontain">
   <%= f.label :pool_id %>
-  <%= f.collection_select(:pool_id, @tournament.pools, :id, :name, { :include_blank => true }) %>
+  <%= f.collection_select(:pool_id, @tournament.pools, :id, :name, { :include_blank => true, :selected => @pool_id }) %>
 </div>
   
 <div data-role="fieldcontain"><%= f.label :name %> <%= f.text_field :name %></div>

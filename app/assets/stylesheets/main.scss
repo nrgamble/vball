@@ -2,6 +2,8 @@
 
 a { text-decoration: none; }
 
+label { font-weight: bold !important; }
+
 td.num { text-align: right; }
 
 .none { display: none; }
@@ -54,3 +56,5 @@ td.num { text-align: right; }
 .bottom {
   .lines { border-top: 0; }
 }
+
+.value { margin: .5em 2% 0 0; }
