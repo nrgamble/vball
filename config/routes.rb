@@ -8,6 +8,8 @@ Vball::Application.routes.draw do
   
   root :to => 'pages#index'
   
+  devise_for :users
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

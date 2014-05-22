@@ -44,5 +44,5 @@ gem 'jquery-rails'
 gem 'mongo_mapper'
 
 # User authentication
-#gem 'devise', '2.2.4'
-#gem 'mm-devise'
+gem 'devise', '2.2.4'
+gem 'mm-devise'

@@ -7,5 +7,9 @@ module ApplicationHelper
     wp[1] = wp[1].ljust(3, '0')
     return "#{wp[0]}.#{wp[1]}"
   end
+
+  def user_can_do_shit?
+    user_signed_in? #and current_user.runs_tournament?
+  end
   
 end

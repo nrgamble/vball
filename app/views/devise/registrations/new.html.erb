@@ -1,18 +1,27 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+  <% content_for :header do %>
+    <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-delete">Cancel</a>
+    <h1 class="ui-title" role="heading" aria-level="1">Bractrack</h1>
+    <%= f.button 'Sign up', :class => "ui-btn-right ui-btn ui-btn-active ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" %>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div data-role="fieldcontain">
+    <%= f.label :email %>
+    <%= f.email_field :email, :autofocus => true %>
+  </div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div data-role="fieldcontain">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+  <div data-role="fieldcontain">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

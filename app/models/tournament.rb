@@ -1,6 +1,7 @@
 class Tournament
   include MongoMapper::Document
 
+  key :user_Id, ObjectId
   key :name, String
   key :date, Time
   key :location, String

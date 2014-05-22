@@ -1,20 +1,21 @@
 <% content_for :header do %>
-  <%= link_to 'Home', root_url,
-              :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-home' %>
+  <%= link_to 'Home', root_path, :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-home' %>
   <h1 class="ui-title" role="heading" aria-level="1"><%= @tournament.name %></h1>
-  <%= link_to 'Edit', edit_tournament_path(@tournament), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-gear' %>
+  <%= link_to 'Edit', edit_tournament_path(@tournament), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' if user_can_do_shit? %>
 <% end %>
 
 <p>
   <%= l @tournament.date, :format => :nice %> at <%= @tournament.location %>
 </p>
 
-<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <%= link_to 'New Team', new_team_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
-  <%= link_to 'New Pool', new_pool_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
-  <!-- <%= link_to 'Fill Pools', @tournament.bracket, 'data-role' => 'button', 'data-theme' => 'b' %> -->
-  <%= link_to 'View Bracket', @tournament.bracket, 'target' => '_blank', 'data-role' => 'button', 'data-theme' => 'b' %>
-</div>
+<% if user_can_do_shit? %>
+  <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <%= link_to 'New Team', new_team_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
+    <%= link_to 'New Pool', new_pool_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
+    <!-- <%= link_to 'Fill Pools', @tournament.bracket, 'data-role' => 'button', 'data-theme' => 'b' %> -->
+    <%= link_to 'View Bracket', @tournament.bracket, 'target' => '_blank', 'data-role' => 'button', 'data-theme' => 'b' %>
+  </div>
+<% end %>
 
 <div data-role="navbar">
   <ul>

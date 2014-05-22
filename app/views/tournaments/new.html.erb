@@ -1,8 +1,8 @@
 <%= form_for @tournament do |f| %>
   <% content_for :header do %>
-    <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</a>
+    <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-delete">Cancel</a>
     <h1 class="ui-title" role="heading" aria-level="1">New Tournament</h1>
-    <%= f.button :Save, :class => "ui-btn-right ui-btn ui-btn-active ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check" %>
+    <%= f.button :Save, :class => "ui-btn-right ui-btn ui-btn-active ui-btn-inline ui-mini ui-btn-icon-right ui-icon-check" %>
   <% end %>
 
   <%= render :partial => 'form', :locals => { :f => f } %>

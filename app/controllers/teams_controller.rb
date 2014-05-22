@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+
+  before_filter :authenticate_user!, :only => [ :index, :new, :edit ]
   
   def index
     @teams = Team.all
@@ -17,7 +19,7 @@ class TeamsController < ApplicationController
   def edit
     @team = Team.find(params[:id])
     @tournament = @team.tournament
-    @pool_id = @team.pool.id
+    @pool_id = @team.pool_id
   end
 
   def create

@@ -1,22 +1,24 @@
 <% content_for :header do %>
   <% if not request.referer.index('pools').nil? %>
     <%= link_to @team.pool.name, @team.pool,
-                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l' %>
+                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
   <% else %>
     <%= link_to @team.tournament.name, @team.tournament,
-                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l' %>
+                :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l' %>
   <% end %>
   <h1 class="ui-title" role="heading" aria-level="1"><%= @team.name %></h1>
-  <%= link_to '', edit_team_path(@team), 'class' => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-gear' %>
+  <%= link_to '', edit_team_path(@team), 'class' => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' if user_can_do_shit? %>
 <% end %>
 
 <p><b>Record:</b> <%= @team.wins.length %> - <%= @team.losses.length %></p>
 
-<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <% unless @team.pool.nil? %>
-  <%= link_to 'New Game', new_game_path(:tournament_id => @team.tournament.id, :pool_id => @team.pool.id), 'data-role' => 'button', 'data-theme' => 'b' %>
-  <% end %>
-</div>
+<% if user_can_do_shit? %>
+  <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <% unless @team.pool.nil? %>
+    <%= link_to 'New Game', new_game_path(:tournament_id => @team.tournament.id, :pool_id => @team.pool.id), 'data-role' => 'button', 'data-theme' => 'b' %>
+    <% end %>
+  </div>
+<% end %>
 
 <div data-role="navbar">
   <ul>

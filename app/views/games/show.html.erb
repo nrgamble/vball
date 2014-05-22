@@ -1,7 +1,7 @@
 <% content_for :header do %>
-  <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Back</a>
+  <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-left ui-icon-carat-l">Back</a>
   <h1 class="ui-title" role="heading" aria-level="1"><%= "#{@game.away.name} @ #{@game.home.name}" %></h1>
-  <%= link_to '', edit_game_path(@game), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-gear' %>
+  <%= link_to '', edit_game_path(@game), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' %>
 <% end %>
 
 <div data-role="controlgroup" data-type="horizontal" data-mini="true">
