@@ -1,5 +1,5 @@
 <% content_for :header do %>
-  <%= link_to 'Home', root_path, :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-home' %>
+  <%= link_to 'Home', root_path, :class => 'ui-btn-left ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-home' if user_can_do_shit? %>
   <h1 class="ui-title" role="heading" aria-level="1"><%= @tournament.name %></h1>
   <%= link_to 'Edit', edit_tournament_path(@tournament), :class => 'ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-notext ui-icon-edit' if user_can_do_shit? %>
 <% end %>
