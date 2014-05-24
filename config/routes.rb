@@ -7,6 +7,8 @@ Vball::Application.routes.draw do
   resources :games
   
   root :to => 'pages#index'
+
+  match 'dee' => 'tournaments#dee'
   
   devise_for :users
   

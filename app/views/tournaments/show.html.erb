@@ -13,7 +13,7 @@
     <%= link_to 'New Team', new_team_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
     <%= link_to 'New Pool', new_pool_path(:tournament_id => @tournament.id), 'data-role' => 'button', 'data-theme' => 'b' %>
     <!-- <%= link_to 'Fill Pools', @tournament.bracket, 'data-role' => 'button', 'data-theme' => 'b' %> -->
-    <%= link_to 'View Bracket', @tournament.bracket, 'target' => '_blank', 'data-role' => 'button', 'data-theme' => 'b' %>
+    <!-- <%= link_to 'View Bracket', @tournament.bracket, 'target' => '_blank', 'data-role' => 'button', 'data-theme' => 'b' %> -->
   </div>
 <% end %>
 
@@ -29,7 +29,7 @@
   <div class="pane">
     <div id="pools">
       <ul data-role="listview" data-inset="true">
-        <% @tournament.pools.each do |pool| %>
+        <% @tournament.pools.sort_by{|p| p.name}.each do |pool| %>
           <li><%= link_to pool.name, pool %></li>
         <% end %>
       </ul>

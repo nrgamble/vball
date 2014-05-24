@@ -1,6 +1,11 @@
 class TournamentsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [ :index, :new, :edit ]
+
+  def dee
+    t = Tournament.first
+    redirect_to t
+  end
   
   def index
     @tournaments = Tournament.all

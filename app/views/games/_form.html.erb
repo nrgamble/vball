@@ -10,15 +10,15 @@
 </div>
 <div data-role="fieldcontain">
   <%= f.label :date, 'Time' %>
-  <%= f.text_field :date, { :value => l(@game.date.in_time_zone('America/Chicago'), :format => :his) } %>
+  <%= f.text_field :date, :value => @game.date, :disabled => ! user_can_do_shit? %>
 </div>
 <div data-role="fieldcontain">
   <%= f.label :court_id %>
-  <%= f.text_field :court_id, { :placeholder => 0 } %>
+  <%= f.text_field :court_id, :placeholder => 0, :disabled => ! user_can_do_shit? %>
 </div>
 <div data-role="fieldcontain">
   <%= f.label :ref_id, 'Referee' %>
-  <%= f.collection_select(:ref_id, @pool.teams, :id, :name, { :prompt => 'Select Referee Team' }) %>
+  <%= f.collection_select(:ref_id, @pool.teams, :id, :name, { :prompt => 'Select Referee Team' }, :disabled => ! user_can_do_shit?) %>
 </div>
 <div data-role="fieldcontain">
   <%= f.label :away_id %>
@@ -36,6 +36,6 @@
   <%= f.label :score_home, "Home Score" %>
   <%= f.text_field :score_home, { :placeholder => 0 } %>
 </div>
-<% unless @game.new? %>
+<% unless @game.new? or ! user_can_do_shit? %>
   <%= link_to 'Delete', @game, :confirm => 'Are you sure?', :method => :delete, 'data-role' => 'button', 'data-theme' => 'b' %>
 <% end %>
