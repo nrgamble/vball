@@ -1,7 +1,7 @@
 class PoolsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [ :index, :new, :edit ]
-  
+
   def index
     @pools = Pool.all
   end

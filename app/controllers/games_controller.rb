@@ -12,9 +12,10 @@ class GamesController < ApplicationController
   
   def new
     @game = Game.new
-    @game.date = DateTime.now
     @tournament = Tournament.find(params[:tournament_id])
     @pool = Pool.find(params[:pool_id])
+
+    @game.date = Time.now
   end
   
   def edit
